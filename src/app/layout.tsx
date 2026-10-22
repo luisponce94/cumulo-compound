@@ -23,8 +23,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="dark">
-      <body className="bg-[#091322] text-[#f8fafc] selection:bg-[#10b981] selection:text-black min-h-screen flex flex-col noise-texture">
+    <html lang="es" className="light">
+      <body className="bg-[#faf8f5] text-[#0f172a] selection:bg-emerald-600 selection:text-white min-h-screen flex flex-col noise-texture">
         <SmoothScroll />
         {children}
       </body>

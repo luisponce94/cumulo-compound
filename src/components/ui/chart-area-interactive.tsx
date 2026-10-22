@@ -85,27 +85,27 @@ export function ChartAreaInteractive({
   }));
 
   return (
-    <div className="bg-[#0e1e36]/90 backdrop-blur-sm rounded-3xl border border-white/12 p-5 sm:p-7 shadow-2xl relative overflow-hidden flex flex-col justify-between">
+    <div className="bg-white rounded-3xl border border-slate-200/90 p-5 sm:p-7 shadow-xl shadow-slate-900/[0.03] relative overflow-hidden flex flex-col justify-between">
       {/* Background glow gradient */}
-      <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -z-0" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none -z-0" />
+      <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none -z-0" />
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-sky-500/5 rounded-full blur-3xl pointer-events-none -z-0" />
 
       {/* Header controls & Legend */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10 relative z-10">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200/80 relative z-10">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-emerald-400 font-bold flex items-center gap-1.5">
+            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-emerald-800 font-bold flex items-center gap-1.5">
               <TrendingUp className="h-3 w-3" />
               Curva de Proyección Temporal
             </span>
             {crossoverYear && (
-              <span className="px-2 py-0.5 rounded-full text-[9px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
+              <span className="px-2 py-0.5 rounded-full text-[9px] font-mono bg-emerald-100 text-emerald-800 border border-emerald-300 flex items-center gap-1 font-bold">
                 <Sparkles className="h-2.5 w-2.5" />
                 Inflexión: Año {crossoverYear}
               </span>
             )}
           </div>
-          <h3 className="text-xl sm:text-2xl font-serif text-white tracking-tight mt-0.5">
+          <h3 className="text-xl sm:text-2xl font-serif text-slate-900 tracking-tight mt-0.5">
             Evolución del Patrimonio & Multiplicador Exponencial
           </h3>
         </div>
@@ -117,8 +117,8 @@ export function ChartAreaInteractive({
             onClick={() => setAdjustInflation(!adjustInflation)}
             className={`px-3 py-1.5 rounded-xl text-xs font-mono font-medium flex items-center gap-1.5 transition-all cursor-pointer border ${
               adjustInflation
-                ? "bg-amber-500/20 border-amber-500 text-amber-300 font-bold"
-                : "border-white/10 bg-white/5 text-white/60 hover:text-white"
+                ? "bg-amber-100 border-amber-400 text-amber-900 font-bold shadow-xs"
+                : "border-slate-200 bg-slate-100 text-slate-600 hover:text-slate-900"
             }`}
           >
             <ShieldCheck className="h-3.5 w-3.5" />
@@ -126,13 +126,13 @@ export function ChartAreaInteractive({
           </button>
 
           {/* Chart Type Selector */}
-          <div className="flex items-center gap-1 bg-[#091528] border border-white/12 p-1 rounded-xl">
+          <div className="flex items-center gap-1 bg-slate-100 border border-slate-200 p-1 rounded-xl">
             <button
               onClick={() => setChartType("area")}
               className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium flex items-center gap-1.5 transition-colors cursor-pointer ${
                 chartType === "area"
-                  ? "bg-emerald-500 text-black font-bold shadow-xs"
-                  : "text-white/60 hover:text-white"
+                  ? "bg-white text-emerald-800 font-bold shadow-xs border border-slate-200/60"
+                  : "text-slate-600 hover:text-slate-900"
               }`}
             >
               <Layers className="h-3.5 w-3.5" />
@@ -142,8 +142,8 @@ export function ChartAreaInteractive({
               onClick={() => setChartType("bars")}
               className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium flex items-center gap-1.5 transition-colors cursor-pointer ${
                 chartType === "bars"
-                  ? "bg-emerald-500 text-black font-bold shadow-xs"
-                  : "text-white/60 hover:text-white"
+                  ? "bg-white text-emerald-800 font-bold shadow-xs border border-slate-200/60"
+                  : "text-slate-600 hover:text-slate-900"
               }`}
             >
               <BarChart2 className="h-3.5 w-3.5" />
@@ -155,36 +155,36 @@ export function ChartAreaInteractive({
 
       {/* Floating Active Point HUD */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 py-4 relative z-10">
-        <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/10">
-          <span className="text-[10px] font-mono text-white/50 block">Punto Inspeccionado</span>
-          <span className="text-sm font-mono font-bold text-white">
+        <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200">
+          <span className="text-[10px] font-mono text-slate-500 block">Punto Inspeccionado</span>
+          <span className="text-sm font-mono font-bold text-slate-900">
             Año {activePoint.year}
           </span>
         </div>
-        <div className="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30">
-          <span className="text-[10px] font-mono text-emerald-400 block flex items-center gap-1">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+        <div className="p-3 rounded-2xl bg-emerald-50 border border-emerald-200">
+          <span className="text-[10px] font-mono text-emerald-800 block flex items-center gap-1 font-bold">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-600" />
             Saldo Final {adjustInflation ? "(Poder Real)" : "(Nominal)"}
           </span>
-          <span className="text-sm sm:text-base font-mono font-bold text-white">
+          <span className="text-sm sm:text-base font-mono font-bold text-slate-900">
             {formatCurrency(adjustInflation ? activePoint.realEndBalance : activePoint.endBalance, currency)}
           </span>
         </div>
-        <div className="p-3 rounded-2xl bg-cyan-500/10 border border-cyan-500/30">
-          <span className="text-[10px] font-mono text-cyan-400 block flex items-center gap-1">
-            <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
+        <div className="p-3 rounded-2xl bg-sky-50 border border-sky-200">
+          <span className="text-[10px] font-mono text-sky-800 block flex items-center gap-1 font-bold">
+            <span className="h-1.5 w-1.5 rounded-full bg-sky-600" />
             Intereses Ganados
           </span>
-          <span className="text-sm sm:text-base font-mono font-bold text-cyan-300">
+          <span className="text-sm sm:text-base font-mono font-bold text-sky-800">
             +{formatCurrency(activePoint.cumulativeInterest, currency)}
           </span>
         </div>
-        <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/10">
-          <span className="text-[10px] font-mono text-white/50 block flex items-center gap-1">
-            <span className="h-1.5 w-1.5 rounded-full bg-slate-400" />
+        <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200">
+          <span className="text-[10px] font-mono text-slate-500 block flex items-center gap-1 font-medium">
+            <span className="h-1.5 w-1.5 rounded-full bg-slate-500" />
             Total Aportado
           </span>
-          <span className="text-sm sm:text-base font-mono font-bold text-slate-200">
+          <span className="text-sm sm:text-base font-mono font-bold text-slate-800">
             {formatCurrency(activePoint.cumulativeContribution, currency)}
           </span>
         </div>
@@ -200,18 +200,18 @@ export function ChartAreaInteractive({
           <defs>
             {/* Gradients */}
             <linearGradient id="interestGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#10b981" stopOpacity="0.85" />
-              <stop offset="100%" stopColor="#10b981" stopOpacity="0.15" />
+              <stop offset="0%" stopColor="#059669" stopOpacity="0.4" />
+              <stop offset="100%" stopColor="#059669" stopOpacity="0.04" />
             </linearGradient>
 
             <linearGradient id="contribGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.75" />
-              <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.15" />
+              <stop offset="0%" stopColor="#0284c7" stopOpacity="0.35" />
+              <stop offset="100%" stopColor="#0284c7" stopOpacity="0.04" />
             </linearGradient>
 
             <linearGradient id="initialGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#64748b" stopOpacity="0.45" />
-              <stop offset="100%" stopColor="#64748b" stopOpacity="0.08" />
+              <stop offset="0%" stopColor="#94a3b8" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#94a3b8" stopOpacity="0.03" />
             </linearGradient>
           </defs>
 
@@ -223,7 +223,7 @@ export function ChartAreaInteractive({
                 y1={t.y}
                 x2={width - padRight}
                 y2={t.y}
-                stroke="rgba(255, 255, 255, 0.08)"
+                stroke="rgba(15, 23, 42, 0.08)"
                 strokeDasharray="4 4"
               />
               <text
@@ -232,7 +232,7 @@ export function ChartAreaInteractive({
                 textAnchor="end"
                 fontSize="10"
                 fontFamily="monospace"
-                fill="rgba(255, 255, 255, 0.4)"
+                fill="rgba(15, 23, 42, 0.55)"
               >
                 {t.val >= 1_000_000
                   ? `$${(t.val / 1_000_000).toFixed(1)}M`
@@ -251,7 +251,7 @@ export function ChartAreaInteractive({
                 y1={padTop}
                 x2={getX(crossoverYear - 1)}
                 y2={padTop + chartHeight}
-                stroke="#10b981"
+                stroke="#059669"
                 strokeWidth="1.5"
                 strokeDasharray="3 3"
               />
@@ -261,7 +261,7 @@ export function ChartAreaInteractive({
                 textAnchor="middle"
                 fontSize="9"
                 fontFamily="monospace"
-                fill="#10b981"
+                fill="#059669"
                 fontWeight="bold"
               >
                 ★ Inflexión
@@ -281,18 +281,18 @@ export function ChartAreaInteractive({
               {/* Interest Fill */}
               <path d={interestAreaD} fill="url(#interestGrad)" />
 
-              {/* Glowing Strokes */}
+              {/* Clean Lines */}
               <path
                 d={`M ${totalPoints.join(" L ")}`}
                 fill="none"
-                stroke="#10b981"
+                stroke="#059669"
                 strokeWidth="2.5"
                 strokeLinecap="round"
               />
               <path
                 d={`M ${contribPoints.join(" L ")}`}
                 fill="none"
-                stroke="#06b6d4"
+                stroke="#0284c7"
                 strokeWidth="1.5"
                 strokeDasharray="4 2"
               />
@@ -322,8 +322,8 @@ export function ChartAreaInteractive({
                       y={yContrib}
                       width={barWidth}
                       height={Math.max(Math.min(hInvested, hTotal), 0)}
-                      fill="#06b6d4"
-                      opacity="0.8"
+                      fill="#0284c7"
+                      opacity="0.85"
                       rx="2"
                     />
                     {/* Interest Bar Segment */}
@@ -332,8 +332,8 @@ export function ChartAreaInteractive({
                       y={yTop}
                       width={barWidth}
                       height={Math.max(hInterest, 0)}
-                      fill="#10b981"
-                      opacity="0.9"
+                      fill="#059669"
+                      opacity="0.95"
                       rx="2"
                     />
                   </g>
@@ -357,7 +357,7 @@ export function ChartAreaInteractive({
                 textAnchor="middle"
                 fontSize="10"
                 fontFamily="monospace"
-                fill="rgba(255, 255, 255, 0.5)"
+                fill="rgba(15, 23, 42, 0.55)"
               >
                 A{d.year}
               </text>
@@ -391,19 +391,19 @@ export function ChartAreaInteractive({
                 y1={padTop}
                 x2={getX(hoverIndex)}
                 y2={padTop + chartHeight}
-                stroke="white"
+                stroke="#0f172a"
                 strokeWidth="1"
                 strokeDasharray="2 2"
-                opacity="0.5"
+                opacity="0.4"
               />
               <circle
                 cx={getX(hoverIndex)}
                 cy={getY(adjustInflation ? breakdown[hoverIndex].realEndBalance : breakdown[hoverIndex].endBalance)}
                 r="6"
-                fill="#10b981"
+                fill="#059669"
                 stroke="#ffffff"
-                strokeWidth="2"
-                filter="drop-shadow(0 0 8px rgba(16, 185, 129, 0.9))"
+                strokeWidth="2.5"
+                filter="drop-shadow(0 2px 6px rgba(5, 150, 105, 0.4))"
               />
             </g>
           )}
@@ -411,23 +411,23 @@ export function ChartAreaInteractive({
       </div>
 
       {/* Legend Footer */}
-      <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4 text-xs font-mono relative z-10">
+      <div className="pt-4 border-t border-slate-200/80 flex flex-wrap items-center justify-between gap-4 text-xs font-mono relative z-10">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-1.5">
-            <span className="h-3 w-3 rounded-full bg-emerald-500 shadow-xs shadow-emerald-500/50" />
-            <span className="text-white/80">Interés Compuesto Generado</span>
+            <span className="h-3 w-3 rounded-full bg-emerald-600 shadow-xs shadow-emerald-600/30" />
+            <span className="text-slate-700 font-medium">Interés Compuesto Generado</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="h-3 w-3 rounded-full bg-cyan-400" />
-            <span className="text-white/80">Tus Aportaciones Periódicas</span>
+            <span className="h-3 w-3 rounded-full bg-sky-600" />
+            <span className="text-slate-700 font-medium">Tus Aportaciones Periódicas</span>
           </div>
           <div className="flex items-center gap-1.5">
-            <span className="h-3 w-3 rounded-full bg-slate-500" />
-            <span className="text-white/80">Capital Inicial</span>
+            <span className="h-3 w-3 rounded-full bg-slate-400" />
+            <span className="text-slate-700 font-medium">Capital Inicial</span>
           </div>
         </div>
 
-        <span className="text-[11px] text-white/40">
+        <span className="text-[11px] text-slate-500">
           Desliza el cursor sobre el gráfico para ver el valor exacto de cada año.
         </span>
       </div>

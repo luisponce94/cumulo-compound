@@ -85,18 +85,18 @@ ${crossoverYear ? `• Año de Inflexión (Interés supera aporte): Año ${cross
   };
 
   return (
-    <div className="bg-[#0e1e36]/90 backdrop-blur-sm rounded-3xl border border-white/12 p-5 sm:p-7 shadow-2xl space-y-5">
+    <div className="bg-white rounded-3xl border border-slate-200/90 p-5 sm:p-7 shadow-xl shadow-slate-900/[0.03] space-y-5">
       {/* Table Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200/80">
         <div>
-          <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-emerald-400 font-bold flex items-center gap-1.5">
+          <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-emerald-800 font-bold flex items-center gap-1.5">
             <Table className="h-3 w-3" />
             Auditoría Numérica Detallada (Dashboard Standard)
           </span>
-          <h3 className="text-xl sm:text-2xl font-serif text-white tracking-tight mt-0.5">
+          <h3 className="text-xl sm:text-2xl font-serif text-slate-900 tracking-tight mt-0.5">
             Desglose Financiero Año por Año
           </h3>
-          <p className="text-xs text-white/50 mt-1 font-mono">
+          <p className="text-xs text-slate-500 mt-1 font-mono">
             Barras proporcionales en celda para visualizar el peso del interés frente al capital.
           </p>
         </div>
@@ -104,12 +104,12 @@ ${crossoverYear ? `• Año de Inflexión (Interés supera aporte): Año ${cross
         <div className="flex items-center gap-2 self-start sm:self-auto">
           <button
             onClick={handleCopySummary}
-            className="px-3.5 py-2 rounded-full bg-white/5 hover:bg-white/10 text-white/80 hover:text-white border border-white/10 text-xs font-mono font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
+            className="px-3.5 py-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 border border-slate-200 text-xs font-mono font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
             title="Copiar resumen al portapapeles"
           >
             {copiedSummary ? (
               <>
-                <Check className="h-3.5 w-3.5 text-emerald-400" />
+                <Check className="h-3.5 w-3.5 text-emerald-600" />
                 <span>Copiado</span>
               </>
             ) : (
@@ -122,11 +122,11 @@ ${crossoverYear ? `• Año de Inflexión (Interés supera aporte): Año ${cross
 
           <button
             onClick={handleExportCSV}
-            className="px-4 py-2 rounded-full bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-mono font-bold flex items-center gap-2 transition-all cursor-pointer shadow-xs"
+            className="px-4 py-2 rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-xs font-mono font-bold flex items-center gap-2 transition-all cursor-pointer shadow-xs"
           >
             {downloadSuccess ? (
               <>
-                <Check className="h-3.5 w-3.5 text-emerald-400" />
+                <Check className="h-3.5 w-3.5 text-emerald-600" />
                 <span>¡Descargado!</span>
               </>
             ) : (
@@ -140,22 +140,22 @@ ${crossoverYear ? `• Año de Inflexión (Interés supera aporte): Año ${cross
       </div>
 
       {/* Responsive Table */}
-      <div className="overflow-x-auto rounded-2xl border border-white/10 bg-[#0b182d]/80">
+      <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-slate-50/50">
         <table className="w-full text-left text-xs border-collapse">
           <thead>
-            <tr className="border-b border-white/10 text-white/50 font-mono bg-white/[0.02]">
+            <tr className="border-b border-slate-200 text-slate-500 font-mono bg-slate-100/70">
               <th className="py-3 px-3.5">Año</th>
               <th className="py-3 px-3.5">Saldo Inicial</th>
               <th className="py-3 px-3.5">Aportación Anual</th>
               <th className="py-3 px-3.5">Interés Ganado (Año)</th>
               <th className="py-3 px-3.5">Interés Acumulado</th>
               <th className="py-3 px-3.5">Capital Aportado</th>
-              <th className="py-3 px-3.5 font-bold text-emerald-400">Saldo Final</th>
-              <th className="py-3 px-3.5 text-white/50 min-w-[130px]">Composición</th>
-              <th className="py-3 px-3.5 text-white/40">Poder Real</th>
+              <th className="py-3 px-3.5 font-bold text-emerald-800">Saldo Final</th>
+              <th className="py-3 px-3.5 text-slate-500 min-w-[130px]">Composición</th>
+              <th className="py-3 px-3.5 text-slate-400">Poder Real</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/5 font-mono text-white/80">
+          <tbody className="divide-y divide-slate-200/70 font-mono text-slate-800">
             {displayedRows.map((row) => {
               const isCrossover = row.year === crossoverYear;
               const isFirstMillion = row.year === firstMillionYear;
@@ -170,67 +170,67 @@ ${crossoverYear ? `• Año de Inflexión (Interés supera aporte): Año ${cross
               return (
                 <tr
                   key={row.year}
-                  className={`hover:bg-white/[0.03] transition-colors ${
+                  className={`hover:bg-slate-100/60 transition-colors ${
                     isCrossover
-                      ? "bg-emerald-500/10 border-l-4 border-l-emerald-400"
+                      ? "bg-emerald-50/80 border-l-4 border-l-emerald-600 font-medium"
                       : isFirstMillion
-                      ? "bg-cyan-500/10 border-l-4 border-l-cyan-400"
+                      ? "bg-sky-50/80 border-l-4 border-l-sky-600 font-medium"
                       : ""
                   }`}
                 >
-                  <td className="py-3 px-3.5 font-bold text-white flex items-center gap-2">
+                  <td className="py-3 px-3.5 font-bold text-slate-900 flex items-center gap-2">
                     <span>A{row.year}</span>
                     {isCrossover && (
-                      <span className="px-2 py-0.5 rounded-full text-[9px] bg-emerald-500 text-black font-bold uppercase tracking-wider">
+                      <span className="px-2 py-0.5 rounded-full text-[9px] bg-emerald-600 text-white font-bold uppercase tracking-wider">
                         Inflexión
                       </span>
                     )}
                     {isFirstMillion && (
-                      <span className="px-2 py-0.5 rounded-full text-[9px] bg-cyan-400 text-black font-bold uppercase tracking-wider">
+                      <span className="px-2 py-0.5 rounded-full text-[9px] bg-sky-600 text-white font-bold uppercase tracking-wider">
                         1er Millón
                       </span>
                     )}
                   </td>
-                  <td className="py-3 px-3.5 text-white/60">
+                  <td className="py-3 px-3.5 text-slate-600">
                     {formatCurrency(row.startBalance, currency)}
                   </td>
-                  <td className="py-3 px-3.5 text-cyan-300">
+                  <td className="py-3 px-3.5 text-sky-700 font-medium">
                     +{formatCurrency(row.annualContribution, currency)}
                   </td>
-                  <td className="py-3 px-3.5 text-emerald-300 font-semibold">
+                  <td className="py-3 px-3.5 text-emerald-700 font-semibold">
                     +{formatCurrency(row.interestEarnedYear, currency)}
                   </td>
-                  <td className="py-3 px-3.5 text-emerald-400 font-medium">
+                  <td className="py-3 px-3.5 text-emerald-800 font-medium">
                     {formatCurrency(row.cumulativeInterest, currency)}
                   </td>
-                  <td className="py-3 px-3.5 text-white/60">
+                  <td className="py-3 px-3.5 text-slate-600">
                     {formatCurrency(row.cumulativeContribution, currency)}
                   </td>
-                  <td className="py-3 px-3.5 font-bold text-white">
+                  <td className="py-3 px-3.5 font-bold text-slate-900">
                     {formatCurrency(row.endBalance, currency)}
                   </td>
                   {/* In-Cell Visual Progress Bar */}
                   <td className="py-3 px-3.5">
                     <div className="space-y-1">
-                      <div className="h-2 w-full bg-white/10 rounded-full overflow-hidden flex">
+                      <div className="h-2 w-full bg-slate-200 rounded-full overflow-hidden flex">
                         <div
-                          className="h-full bg-cyan-500 transition-all duration-300"
+                          className="h-full bg-sky-500 transition-all duration-300"
                           style={{ width: `${principalShare}%` }}
                           title={`Capital propio: ${principalShare}%`}
                         />
                         <div
-                          className="h-full bg-emerald-400 transition-all duration-300"
+                          className="h-full bg-emerald-600 transition-all duration-300"
                           style={{ width: `${interestShare}%` }}
                           title={`Interés ganado: ${interestShare}%`}
                         />
                       </div>
-                      <div className="flex justify-between text-[9px] text-white/40">
-                        <span className="text-cyan-400">{principalShare}% cap</span>
-                        <span className="text-emerald-400">{interestShare}% int</span>
+                      <div className="flex justify-between text-[9px] text-slate-500">
+                        <span className="text-sky-700 font-medium">{principalShare}% cap</span>
+                        <span className="text-emerald-700 font-medium">{interestShare}% int</span>
                       </div>
                     </div>
                   </td>
-                  <td className="py-3 px-3.5 text-white/40">
+                  <td className="py-3 px-3.5 text-slate-500">
                     {formatCurrency(row.realEndBalance, currency)}
                   </td>
                 </tr>
@@ -245,7 +245,7 @@ ${crossoverYear ? `• Año de Inflexión (Interés supera aporte): Año ${cross
         <div className="text-center pt-2">
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="px-5 py-2 rounded-full bg-white/5 hover:bg-white/10 text-xs font-mono text-white/80 hover:text-white border border-white/10 transition-colors inline-flex items-center gap-1.5 cursor-pointer"
+            className="px-5 py-2 rounded-full bg-slate-100 hover:bg-slate-200 text-xs font-mono text-slate-700 hover:text-slate-900 border border-slate-200 transition-colors inline-flex items-center gap-1.5 cursor-pointer shadow-xs"
           >
             {isExpanded ? (
               <>

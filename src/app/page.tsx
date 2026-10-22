@@ -171,29 +171,29 @@ ${window.location.href}`;
   };
 
   return (
-    <div className="min-h-screen bg-transparent text-[#f8fafc] font-sans noise-texture flex flex-col justify-between">
+    <div className="min-h-screen bg-transparent text-slate-900 font-sans noise-texture flex flex-col justify-between">
       
       {/* 1. TOP NAVIGATION & HEADER */}
-      <header className="sticky top-0 z-40 bg-[#091322]/85 backdrop-blur-md border-b border-white/10 px-4 sm:px-8 py-3.5">
+      <header className="sticky top-0 z-40 bg-[#faf8f5]/90 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-8 py-3.5 shadow-xs">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           
           {/* Brand Logo & Title */}
           <div className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-emerald-500 to-cyan-400 p-[1.5px] shadow-lg shadow-emerald-500/20">
-              <div className="w-full h-full bg-[#0d1d36] rounded-[10px] flex items-center justify-center text-emerald-400">
+            <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 p-[1.5px] shadow-md shadow-emerald-500/20">
+              <div className="w-full h-full bg-white rounded-[10px] flex items-center justify-center text-emerald-600">
                 <TrendingUp className="h-5 w-5" />
               </div>
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-mono text-base font-bold tracking-wider text-white">
+                <span className="font-mono text-base font-bold tracking-wider text-slate-900">
                   CÚMULO
                 </span>
-                <span className="text-[9px] font-mono uppercase bg-emerald-500/15 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/30 font-semibold tracking-wider">
+                <span className="text-[9px] font-mono uppercase bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded border border-emerald-200 font-semibold tracking-wider">
                   21ST EDITION
                 </span>
               </div>
-              <p className="text-[10px] text-white/50 font-mono hidden sm:block">
+              <p className="text-[10px] text-slate-500 font-mono hidden sm:block">
                 Proyección Patrimonial & Harness de Ingeniería Financiera
               </p>
             </div>
@@ -202,15 +202,15 @@ ${window.location.href}`;
           {/* Currency Switcher & Actions */}
           <div className="flex items-center gap-2 sm:gap-3">
             {/* Currency Selector */}
-            <div className="flex items-center bg-white/5 border border-white/10 rounded-full p-1 text-xs font-mono">
+            <div className="flex items-center bg-slate-100 border border-slate-200 rounded-full p-1 text-xs font-mono">
               {(["MXN", "USD", "EUR"] as CurrencyCode[]).map((cur) => (
                 <button
                   key={cur}
                   onClick={() => setCurrency(cur)}
                   className={`px-2.5 py-1 rounded-full transition-colors cursor-pointer ${
                     currency === cur
-                      ? "bg-emerald-500 text-black font-bold shadow-xs"
-                      : "text-white/60 hover:text-white"
+                      ? "bg-white text-emerald-700 font-bold shadow-xs border border-slate-200/60"
+                      : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
                   {cur}
@@ -223,8 +223,8 @@ ${window.location.href}`;
               onClick={() => setShowHarness(!showHarness)}
               className={`px-3 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase transition-all flex items-center gap-1.5 cursor-pointer border ${
                 showHarness
-                  ? "bg-cyan-500 text-black border-cyan-400 shadow-lg shadow-cyan-500/20"
-                  : "bg-white/5 border-white/10 text-white/70 hover:text-white"
+                  ? "bg-sky-600 text-white border-sky-600 shadow-md shadow-sky-600/20"
+                  : "bg-slate-100 border-slate-200 text-slate-700 hover:text-slate-900 hover:bg-slate-200/70"
               }`}
             >
               <Cpu className="h-3.5 w-3.5" />
@@ -234,7 +234,7 @@ ${window.location.href}`;
             {/* A/B Comparator Toggle Button */}
             <button
               onClick={() => setIsCompareOpen(true)}
-              className="px-3 py-1.5 rounded-full bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/30 text-cyan-300 text-xs font-mono font-bold tracking-wider uppercase transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
+              className="px-3 py-1.5 rounded-full bg-sky-50 hover:bg-sky-100 border border-sky-200 text-sky-800 text-xs font-mono font-bold tracking-wider uppercase transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
             >
               <GitCompare className="h-3.5 w-3.5" />
               <span className="hidden md:inline">Comparar A/B</span>
@@ -243,20 +243,20 @@ ${window.location.href}`;
             {/* Shimmer Button Target Goal */}
             <ShimmerButton
               onClick={() => setIsGoalModalOpen(true)}
-              className="py-1.5 px-3.5 text-xs text-black"
-              background="radial-gradient(ellipse 80% 50% at 50% 120%, rgba(16, 185, 129, 0.9), rgba(6, 182, 212, 0.95))"
+              className="py-1.5 px-3.5 text-xs text-white"
+              background="linear-gradient(135deg, #059669 0%, #0d9488 100%)"
             >
-              <Target className="h-3.5 w-3.5 text-black" />
-              <span className="text-black font-bold">Definir Meta</span>
+              <Target className="h-3.5 w-3.5 text-white" />
+              <span className="text-white font-bold">Definir Meta</span>
             </ShimmerButton>
 
             {/* Share Snapshot */}
             <button
               onClick={handleShare}
-              className="p-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white/70 hover:text-white transition-colors cursor-pointer"
+              className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 hover:text-slate-900 transition-colors cursor-pointer"
               title="Copiar enlace con parámetros al portapapeles"
             >
-              {copiedLink ? <Check className="h-4 w-4 text-emerald-400" /> : <Share2 className="h-4 w-4" />}
+              {copiedLink ? <Check className="h-4 w-4 text-emerald-600" /> : <Share2 className="h-4 w-4" />}
             </button>
           </div>
 
@@ -290,17 +290,17 @@ ${window.location.href}`;
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           
           {/* Card 1: Final Balance with BorderBeam */}
-          <div className="p-6 rounded-3xl bg-gradient-to-br from-emerald-500/20 via-[#0e1e36] to-[#0b172a] border border-emerald-500/40 shadow-xl relative overflow-hidden">
-            <BorderBeam size={250} duration={8} colorFrom="#10b981" colorTo="#34d399" />
-            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-emerald-300 block font-bold">
+          <div className="p-6 rounded-3xl bg-gradient-to-br from-emerald-50 via-white to-emerald-50/40 border border-emerald-300 shadow-xl shadow-emerald-900/[0.04] relative overflow-hidden">
+            <BorderBeam size={250} duration={8} colorFrom="#059669" colorTo="#10b981" />
+            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-emerald-800 block font-bold">
               Saldo Final Proyectado
             </span>
-            <div className="mt-2 font-mono text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            <div className="mt-2 font-mono text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
               $<NumberTicker value={results.finalBalance} />
             </div>
-            <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono">
-              <span className="text-white/50">Poder real (inflación):</span>
-              <span className="text-emerald-400 font-bold">
+            <div className="mt-3 pt-3 border-t border-slate-200/80 flex items-center justify-between text-xs font-mono">
+              <span className="text-slate-500">Poder real (inflación):</span>
+              <span className="text-emerald-700 font-bold">
                 ${results.realFinalBalance.toLocaleString()}
               </span>
             </div>
@@ -308,52 +308,52 @@ ${window.location.href}`;
 
           {/* Card 2: Interest Earned */}
           <SpotlightCard className="p-6">
-            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-emerald-400 block font-bold flex items-center justify-between">
+            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-emerald-800 block font-bold flex items-center justify-between">
               <span>Interés Ganado (Ganancia)</span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold">
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold border border-emerald-200">
                 {interestPct}% del total
               </span>
             </span>
-            <div className="mt-2 font-mono text-3xl sm:text-4xl font-bold text-emerald-400 tracking-tight">
+            <div className="mt-2 font-mono text-3xl sm:text-4xl font-bold text-emerald-600 tracking-tight">
               +$<NumberTicker value={results.totalInterest} />
             </div>
-            <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono text-white/50">
+            <div className="mt-3 pt-3 border-t border-slate-200/80 flex items-center justify-between text-xs font-mono text-slate-500">
               <span>Efecto bola de nieve:</span>
-              <span className="text-white font-medium">Dinero generado</span>
+              <span className="text-slate-800 font-medium">Dinero generado</span>
             </div>
           </SpotlightCard>
 
           {/* Card 3: Total Invested Out of Pocket */}
           <SpotlightCard className="p-6">
-            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-cyan-400 block font-bold flex items-center justify-between">
+            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-sky-800 block font-bold flex items-center justify-between">
               <span>Total Invertido Propio</span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-bold">
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-sky-100 text-sky-800 font-bold border border-sky-200">
                 {principalPct}% del total
               </span>
             </span>
-            <div className="mt-2 font-mono text-3xl sm:text-4xl font-bold text-slate-200 tracking-tight">
+            <div className="mt-2 font-mono text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight">
               $<NumberTicker value={results.totalInvested} />
             </div>
-            <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono text-white/50">
+            <div className="mt-3 pt-3 border-t border-slate-200/80 flex items-center justify-between text-xs font-mono text-slate-500">
               <span>Ahorro de tu bolsillo:</span>
-              <span className="text-white font-medium">{years} años</span>
+              <span className="text-slate-800 font-medium">{years} años</span>
             </div>
           </SpotlightCard>
 
           {/* Card 4: Wealth Multiplier with GaugeMeter */}
           <SpotlightCard className="p-6 flex flex-col justify-between">
-            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-amber-400 block font-bold flex items-center justify-between">
+            <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-amber-900 block font-bold flex items-center justify-between">
               <span>Velocidad de Riqueza</span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-bold">
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 font-bold border border-amber-200">
                 {results.wealthMultiplier}x
               </span>
             </span>
             <div className="my-1 flex justify-center">
               <GaugeMeter value={results.wealthMultiplier} max={8} />
             </div>
-            <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs font-mono">
-              <span className="text-white/50">Renta pasiva:</span>
-              <span className="text-amber-300 font-bold">
+            <div className="pt-2 border-t border-slate-200/80 flex items-center justify-between text-xs font-mono">
+              <span className="text-slate-500">Renta pasiva:</span>
+              <span className="text-amber-800 font-bold">
                 ${results.monthlyPassiveIncome.toLocaleString()}/mes
               </span>
             </div>
@@ -370,12 +370,12 @@ ${window.location.href}`;
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* LEFT: SLIDERS & CONTROLS DASHBOARD */}
-          <div className="lg:col-span-5 bg-[#0e1e36]/90 backdrop-blur-sm rounded-3xl border border-white/12 p-6 sm:p-7 shadow-2xl space-y-6">
+          <div className="lg:col-span-5 bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-7 shadow-xl shadow-slate-900/[0.03] space-y-6">
             
-            <div className="flex items-center justify-between pb-3 border-b border-white/10">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-200/70">
               <div className="flex items-center gap-2">
-                <Sliders className="h-4 w-4 text-emerald-400" />
-                <h3 className="font-serif text-lg text-white font-normal">
+                <Sliders className="h-4 w-4 text-emerald-600" />
+                <h3 className="font-serif text-lg text-slate-900 font-normal">
                   Variables de Inversión
                 </h3>
               </div>
@@ -389,7 +389,7 @@ ${window.location.href}`;
                   setAnnualInflationRate(4.0);
                   setActivePresetId("cetes");
                 }}
-                className="text-[11px] font-mono text-white/40 hover:text-emerald-400 flex items-center gap-1 transition-colors cursor-pointer"
+                className="text-[11px] font-mono text-slate-500 hover:text-emerald-700 flex items-center gap-1 transition-colors cursor-pointer"
               >
                 <RefreshCw className="h-3 w-3" />
                 <span>Restablecer</span>
@@ -399,10 +399,10 @@ ${window.location.href}`;
             {/* CONTROL 1: Capital Inicial */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-mono text-white/70">
+                <label className="text-xs font-mono text-slate-700 font-medium">
                   Capital Inicial
                 </label>
-                <div className="flex items-center gap-1 bg-white/5 border border-white/15 px-3 py-1 rounded-xl text-xs font-mono font-bold text-white">
+                <div className="flex items-center gap-1 bg-slate-50 border border-slate-200 px-3 py-1 rounded-xl text-xs font-mono font-bold text-slate-900">
                   <span>$</span>
                   <input
                     type="number"
@@ -430,13 +430,13 @@ ${window.location.href}`;
                 className="w-full cursor-pointer"
               />
               {/* Stepper Quick Increments */}
-              <div className="flex items-center justify-between text-[10px] font-mono text-white/40">
+              <div className="flex items-center justify-between text-[10px] font-mono text-slate-500">
                 <div className="flex gap-1.5">
                   {[10_000, 50_000, 100_000].map((step) => (
                     <button
                       key={step}
                       onClick={() => setInitialCapital((prev) => prev + step)}
-                      className="px-2 py-0.5 rounded bg-white/5 hover:bg-white/10 text-white/70 hover:text-white transition-colors cursor-pointer flex items-center gap-0.5"
+                      className="px-2 py-0.5 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 transition-colors cursor-pointer flex items-center gap-0.5 border border-slate-200/60"
                     >
                       <Plus className="h-2.5 w-2.5" />
                       ${step / 1000}k
@@ -448,12 +448,12 @@ ${window.location.href}`;
             </div>
 
             {/* CONTROL 2: Aportación Periódica & Frecuencia */}
-            <div className="space-y-2 pt-2 border-t border-white/5">
+            <div className="space-y-2 pt-2 border-t border-slate-200/70">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-mono text-white/70">
+                <label className="text-xs font-mono text-slate-700 font-medium">
                   Aportación Regular
                 </label>
-                <div className="flex items-center gap-1 bg-white/5 border border-white/15 px-3 py-1 rounded-xl text-xs font-mono font-bold text-cyan-400">
+                <div className="flex items-center gap-1 bg-slate-50 border border-slate-200 px-3 py-1 rounded-xl text-xs font-mono font-bold text-sky-700">
                   <span>$</span>
                   <input
                     type="number"
@@ -481,13 +481,13 @@ ${window.location.href}`;
                 className="w-full cursor-pointer"
               />
               {/* Stepper Quick Increments */}
-              <div className="flex items-center justify-between text-[10px] font-mono text-white/40">
+              <div className="flex items-center justify-between text-[10px] font-mono text-slate-500">
                 <div className="flex gap-1.5">
                   {[500, 1_000, 2_500, 5_000].map((step) => (
                     <button
                       key={step}
                       onClick={() => setPeriodicContribution((prev) => prev + step)}
-                      className="px-2 py-0.5 rounded bg-white/5 hover:bg-white/10 text-cyan-300/80 hover:text-cyan-300 transition-colors cursor-pointer flex items-center gap-0.5"
+                      className="px-2 py-0.5 rounded bg-sky-50 hover:bg-sky-100 text-sky-800 transition-colors cursor-pointer flex items-center gap-0.5 border border-sky-200/60"
                     >
                       <Plus className="h-2.5 w-2.5" />
                       ${step}
@@ -505,8 +505,8 @@ ${window.location.href}`;
                     onClick={() => setContributionFrequency(freq)}
                     className={`flex-1 py-1 rounded-lg text-[10px] font-mono capitalize transition-colors cursor-pointer ${
                       contributionFrequency === freq
-                        ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-bold"
-                        : "bg-white/5 text-white/60 hover:text-white border border-transparent"
+                        ? "bg-sky-100 text-sky-800 border border-sky-300 font-bold"
+                        : "bg-slate-100 text-slate-600 hover:text-slate-900 border border-slate-200/60"
                     }`}
                   >
                     {freq}
@@ -516,12 +516,12 @@ ${window.location.href}`;
             </div>
 
             {/* CONTROL 3: Tasa de Interés Anual */}
-            <div className="space-y-2 pt-2 border-t border-white/5">
+            <div className="space-y-2 pt-2 border-t border-slate-200/70">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-mono text-white/70">
+                <label className="text-xs font-mono text-slate-700 font-medium">
                   Tasa de Rendimiento Anual
                 </label>
-                <div className="flex items-center gap-1 bg-white/5 border border-white/15 px-3 py-1 rounded-xl text-xs font-mono font-bold text-emerald-400">
+                <div className="flex items-center gap-1 bg-slate-50 border border-slate-200 px-3 py-1 rounded-xl text-xs font-mono font-bold text-emerald-700">
                   <input
                     type="number"
                     min={0.1}
@@ -549,7 +549,7 @@ ${window.location.href}`;
                 }}
                 className="w-full cursor-pointer"
               />
-              <div className="flex justify-between text-[10px] font-mono text-white/40">
+              <div className="flex justify-between text-[10px] font-mono text-slate-500">
                 <span>1%</span>
                 <span>10% (S&P/Cetes)</span>
                 <span>20%</span>
@@ -558,12 +558,12 @@ ${window.location.href}`;
             </div>
 
             {/* CONTROL 4: Plazo en Años */}
-            <div className="space-y-2 pt-2 border-t border-white/5">
+            <div className="space-y-2 pt-2 border-t border-slate-200/70">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-mono text-white/70">
+                <label className="text-xs font-mono text-slate-700 font-medium">
                   Plazo de Inversión
                 </label>
-                <div className="flex items-center gap-1 bg-white/5 border border-white/15 px-3 py-1 rounded-xl text-xs font-mono font-bold text-white">
+                <div className="flex items-center gap-1 bg-slate-50 border border-slate-200 px-3 py-1 rounded-xl text-xs font-mono font-bold text-slate-900">
                   <input
                     type="number"
                     min={1}
@@ -572,7 +572,7 @@ ${window.location.href}`;
                     onChange={(e) => setYears(Math.min(40, Math.max(1, Number(e.target.value))))}
                     className="w-12 bg-transparent text-right focus:outline-none"
                   />
-                  <span className="text-white/40">años</span>
+                  <span className="text-slate-500">años</span>
                 </div>
               </div>
               <input
@@ -592,8 +592,8 @@ ${window.location.href}`;
                     onClick={() => setYears(yr)}
                     className={`flex-1 py-1 rounded-lg text-[10px] font-mono transition-colors cursor-pointer ${
                       years === yr
-                        ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold"
-                        : "bg-white/5 text-white/60 hover:text-white border border-transparent"
+                        ? "bg-emerald-100 text-emerald-800 border border-emerald-300 font-bold"
+                        : "bg-slate-100 text-slate-600 hover:text-slate-900 border border-slate-200/60"
                     }`}
                   >
                     {yr}a
@@ -603,10 +603,10 @@ ${window.location.href}`;
             </div>
 
             {/* CONTROL 5: Capitalización & Inflación */}
-            <div className="pt-2 border-t border-white/5 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="pt-2 border-t border-slate-200/70 grid grid-cols-1 sm:grid-cols-2 gap-3">
               
               <div className="space-y-1.5">
-                <label className="text-[11px] font-mono text-white/60 block">
+                <label className="text-[11px] font-mono text-slate-600 block font-medium">
                   Capitalización
                 </label>
                 <select
@@ -615,21 +615,21 @@ ${window.location.href}`;
                     setCompoundFrequency(Number(e.target.value) as CompoundFrequency);
                     setActivePresetId(null);
                   }}
-                  className="w-full px-2.5 py-1.5 bg-white/5 border border-white/15 rounded-xl text-xs font-mono text-white focus:outline-none focus:border-emerald-500 cursor-pointer"
+                  className="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono text-slate-900 focus:outline-none focus:border-emerald-600 cursor-pointer"
                 >
-                  <option value={365} className="bg-[#0e1e36] text-white">Diaria (365/año)</option>
-                  <option value={12} className="bg-[#0e1e36] text-white">Mensual (12/año)</option>
-                  <option value={4} className="bg-[#0e1e36] text-white">Trimestral (4/año)</option>
-                  <option value={2} className="bg-[#0e1e36] text-white">Semestral (2/año)</option>
-                  <option value={1} className="bg-[#0e1e36] text-white">Anual (1/año)</option>
+                  <option value={365} className="bg-white text-slate-900">Diaria (365/año)</option>
+                  <option value={12} className="bg-white text-slate-900">Mensual (12/año)</option>
+                  <option value={4} className="bg-white text-slate-900">Trimestral (4/año)</option>
+                  <option value={2} className="bg-white text-slate-900">Semestral (2/año)</option>
+                  <option value={1} className="bg-white text-slate-900">Anual (1/año)</option>
                 </select>
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[11px] font-mono text-white/60 block">
+                <label className="text-[11px] font-mono text-slate-600 block font-medium">
                   Inflación Anual (%)
                 </label>
-                <div className="flex items-center gap-1 bg-white/5 border border-white/15 px-3 py-1.5 rounded-xl text-xs font-mono text-white">
+                <div className="flex items-center gap-1 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl text-xs font-mono text-slate-900">
                   <input
                     type="number"
                     min={0}
@@ -637,9 +637,9 @@ ${window.location.href}`;
                     step={0.5}
                     value={annualInflationRate}
                     onChange={(e) => setAnnualInflationRate(Number(e.target.value))}
-                    className="w-full bg-transparent focus:outline-none"
+                    className="w-full bg-transparent focus:outline-none font-bold text-slate-900"
                   />
-                  <span className="text-white/40">%</span>
+                  <span className="text-slate-500">%</span>
                 </div>
               </div>
 
@@ -660,25 +660,25 @@ ${window.location.href}`;
             {/* MILESTONE INSIGHTS STRIP */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               
-              <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/10 space-y-1">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1">
-                  <Sparkles className="h-3 w-3" />
+              <div className="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200/80 space-y-1">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-800 font-bold flex items-center gap-1">
+                  <Sparkles className="h-3 w-3 text-emerald-600" />
                   La Regla del 72
                 </span>
-                <p className="text-xs font-mono text-white/80">
-                  Al <strong className="text-emerald-400">{annualInterestRate}%</strong> anual, tu capital se duplica automáticamente cada <strong className="text-white">{yearsToDouble} años</strong> sin necesidad de aportar más.
+                <p className="text-xs font-mono text-slate-700">
+                  Al <strong className="text-emerald-700 font-bold">{annualInterestRate}%</strong> anual, tu capital se duplica automáticamente cada <strong className="text-slate-900 font-bold">{yearsToDouble} años</strong> sin necesidad de aportar más.
                 </p>
               </div>
 
-              <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/10 space-y-1">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1">
-                  <Target className="h-3 w-3" />
+              <div className="p-4 rounded-2xl bg-sky-50/70 border border-sky-200/80 space-y-1">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-sky-800 font-bold flex items-center gap-1">
+                  <Target className="h-3 w-3 text-sky-600" />
                   Punto de Inflexión Financiera
                 </span>
-                <p className="text-xs font-mono text-white/80">
+                <p className="text-xs font-mono text-slate-700">
                   {results.crossoverYear ? (
                     <>
-                      En el <strong className="text-cyan-400">Año {results.crossoverYear}</strong>, los intereses generados superan todo el dinero que depositaste de tu bolsillo.
+                      En el <strong className="text-sky-800 font-bold">Año {results.crossoverYear}</strong>, los intereses generados superan todo el dinero que depositaste de tu bolsillo.
                     </>
                   ) : (
                     <>
@@ -720,17 +720,17 @@ ${window.location.href}`;
         />
 
         {/* 6. EDUCATIONAL FINANCIAL INTELLIGENCE */}
-        <div className="bg-[#0e1e36]/90 backdrop-blur-sm rounded-3xl border border-white/12 p-6 sm:p-8 space-y-4">
+        <div className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-8 space-y-4 shadow-xl shadow-slate-900/[0.03]">
           <div className="flex items-center gap-2">
-            <HelpCircle className="h-4 w-4 text-emerald-400" />
-            <h3 className="font-serif text-xl text-white font-normal">
+            <HelpCircle className="h-4 w-4 text-emerald-600" />
+            <h3 className="font-serif text-xl text-slate-900 font-normal">
               Principios Clave del Interés Compuesto
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2 text-xs font-mono text-white/60 leading-relaxed">
-            <div className="space-y-1.5">
-              <h4 className="font-bold text-white uppercase text-[11px] tracking-wider text-emerald-400">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2 text-xs font-mono text-slate-600 leading-relaxed">
+            <div className="space-y-1.5 p-4 rounded-2xl bg-slate-50 border border-slate-200/70">
+              <h4 className="font-bold uppercase text-[11px] tracking-wider text-emerald-700">
                 1. El Tiempo es tu Mayor Activo
               </h4>
               <p>
@@ -738,8 +738,8 @@ ${window.location.href}`;
               </p>
             </div>
 
-            <div className="space-y-1.5">
-              <h4 className="font-bold text-white uppercase text-[11px] tracking-wider text-cyan-400">
+            <div className="space-y-1.5 p-4 rounded-2xl bg-slate-50 border border-slate-200/70">
+              <h4 className="font-bold uppercase text-[11px] tracking-wider text-sky-700">
                 2. Frecuencia de Reinversión
               </h4>
               <p>
@@ -747,8 +747,8 @@ ${window.location.href}`;
               </p>
             </div>
 
-            <div className="space-y-1.5">
-              <h4 className="font-bold text-white uppercase text-[11px] tracking-wider text-amber-400">
+            <div className="space-y-1.5 p-4 rounded-2xl bg-slate-50 border border-slate-200/70">
+              <h4 className="font-bold uppercase text-[11px] tracking-wider text-amber-800">
                 3. Descontar la Inflación
               </h4>
               <p>
@@ -777,11 +777,11 @@ ${window.location.href}`;
       />
 
       {/* 9. FOOTER */}
-      <footer className="border-t border-white/10 py-8 px-4 sm:px-8 text-center text-xs font-mono text-white/40 space-y-2">
-        <p className="font-semibold text-white/60">
+      <footer className="border-t border-slate-200/80 py-8 px-4 sm:px-8 text-center text-xs font-mono text-slate-500 space-y-2 bg-[#f4f1ea]/50">
+        <p className="font-semibold text-slate-800">
           CÚMULO — Motor de Inteligencia Financiera & Interés Compuesto
         </p>
-        <p className="text-[11px]">
+        <p className="text-[11px] text-slate-500">
           Fórmulas matemáticas de matemática financiera exacta basadas en anualidades ordinarias y valor futuro discreto.
         </p>
       </footer>

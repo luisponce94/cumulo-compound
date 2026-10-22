@@ -50,7 +50,7 @@ export function GaugeMeter({
           <path
             d={`M ${strokeWidth / 2} ${size / 2} A ${radius} ${radius} 0 0 1 ${size - strokeWidth / 2} ${size / 2}`}
             fill="none"
-            stroke="rgba(255, 255, 255, 0.08)"
+            stroke="#e2e8f0"
             strokeWidth={strokeWidth}
             strokeLinecap="round"
           />
@@ -70,15 +70,15 @@ export function GaugeMeter({
 
         {/* Central Counter Display */}
         <div className="absolute bottom-0 text-center flex flex-col items-center">
-          <span className="font-mono text-2xl font-black text-amber-300 tracking-tight leading-none">
+          <span className="font-mono text-2xl font-black text-amber-800 tracking-tight leading-none">
             {value.toFixed(1)}x
           </span>
-          <span className="text-[9px] font-mono uppercase text-white/40 tracking-wider mt-1">
+          <span className="text-[9px] font-mono uppercase text-slate-500 tracking-wider mt-1 font-semibold">
             Retorno Total
           </span>
         </div>
       </div>
-      <span className="text-[10px] font-mono text-white/50 text-center mt-1">
+      <span className="text-[10px] font-mono text-slate-500 text-center mt-1">
         {label}
       </span>
     </div>

@@ -34,19 +34,19 @@ export function FireCalculatorCard({
   const fireYearReached = breakdown.find((b) => b.endBalance >= fireTarget)?.year || null;
 
   return (
-    <div className="bg-[#0e1e36]/90 backdrop-blur-sm rounded-3xl border border-white/12 p-5 sm:p-6 shadow-2xl relative overflow-hidden flex flex-col justify-between">
+    <div className="bg-white rounded-3xl border border-slate-200/90 p-5 sm:p-6 shadow-xl shadow-slate-900/[0.03] relative overflow-hidden flex flex-col justify-between">
       {/* Background glow */}
-      <div className="absolute top-0 right-0 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none -z-0" />
+      <div className="absolute top-0 right-0 w-48 h-48 bg-amber-500/5 rounded-full blur-3xl pointer-events-none -z-0" />
 
       {/* Header */}
-      <div className="flex items-center justify-between pb-3 border-b border-white/10">
+      <div className="flex items-center justify-between pb-3 border-b border-slate-200/80">
         <div className="flex items-center gap-2">
-          <Flame className="h-4 w-4 text-amber-400" />
-          <h3 className="font-serif text-lg text-white font-normal">
+          <Flame className="h-4 w-4 text-amber-600" />
+          <h3 className="font-serif text-lg text-slate-900 font-normal">
             Libertad Financiera (Regla FIRE 4%)
           </h3>
         </div>
-        <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30 font-semibold">
+        <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-300 font-bold">
           Renta Pasiva Vitalicia
         </span>
       </div>
@@ -55,8 +55,8 @@ export function FireCalculatorCard({
         {/* Input Expense Stepper */}
         <div className="space-y-1.5">
           <div className="flex items-center justify-between text-xs font-mono">
-            <label className="text-white/70">Tus Gastos Mensuales Deseados:</label>
-            <div className="flex items-center gap-1 bg-white/5 border border-white/15 px-2.5 py-1 rounded-xl font-bold text-white">
+            <label className="text-slate-700 font-medium">Tus Gastos Mensuales Deseados:</label>
+            <div className="flex items-center gap-1 bg-slate-50 border border-slate-200 px-2.5 py-1 rounded-xl font-bold text-slate-900">
               <span>$</span>
               <input
                 type="number"
@@ -66,7 +66,7 @@ export function FireCalculatorCard({
                 onChange={(e) => setMonthlyExpense(Math.max(Number(e.target.value) || 0, 1_000))}
                 className="w-20 bg-transparent text-right font-mono text-xs focus:outline-none"
               />
-              <span className="text-white/40 text-[10px]">{currency}/mes</span>
+              <span className="text-slate-500 text-[10px]">{currency}/mes</span>
             </div>
           </div>
 
@@ -78,8 +78,8 @@ export function FireCalculatorCard({
                 onClick={() => setMonthlyExpense(amt)}
                 className={`text-[10px] font-mono px-2 py-0.5 rounded-lg border transition-all cursor-pointer ${
                   monthlyExpense === amt
-                    ? "bg-amber-500/20 border-amber-500 text-amber-300 font-bold"
-                    : "border-white/10 text-white/50 hover:text-white"
+                    ? "bg-amber-100 border-amber-400 text-amber-900 font-bold shadow-xs"
+                    : "border-slate-200 bg-slate-50 text-slate-600 hover:text-slate-900"
                 }`}
               >
                 ${amt / 1000}k
@@ -91,13 +91,13 @@ export function FireCalculatorCard({
         {/* Progress Bar & Status */}
         <div className="space-y-2 pt-1">
           <div className="flex items-center justify-between text-xs font-mono">
-            <span className="text-white/50">Progreso a la Independencia:</span>
-            <span className="font-bold text-amber-400">{freedomPercent}%</span>
+            <span className="text-slate-500 font-medium">Progreso a la Independencia:</span>
+            <span className="font-bold text-amber-700">{freedomPercent}%</span>
           </div>
 
-          <div className="h-3 w-full bg-white/5 rounded-full overflow-hidden p-0.5 border border-white/10">
+          <div className="h-3 w-full bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-amber-500 to-emerald-400 transition-all duration-500"
+              className="h-full rounded-full bg-gradient-to-r from-amber-500 to-emerald-500 transition-all duration-500"
               style={{ width: `${Math.min(freedomPercent, 100)}%` }}
             />
           </div>
@@ -105,22 +105,22 @@ export function FireCalculatorCard({
 
         {/* 2 Metrics Cards */}
         <div className="grid grid-cols-2 gap-3 pt-1">
-          <div className="p-3 rounded-2xl bg-white/[0.02] border border-white/10">
-            <span className="text-[10px] font-mono text-white/50 block">Patrimonio FIRE Objetivo:</span>
-            <span className="font-mono text-sm sm:text-base font-bold text-white">
+          <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200">
+            <span className="text-[10px] font-mono text-slate-500 block font-medium">Patrimonio FIRE Objetivo:</span>
+            <span className="font-mono text-sm sm:text-base font-bold text-slate-900">
               {formatCurrency(fireTarget, currency)}
             </span>
-            <span className="text-[10px] font-mono text-white/40 block mt-0.5">
+            <span className="text-[10px] font-mono text-slate-400 block mt-0.5">
               (25x tus gastos anuales)
             </span>
           </div>
 
-          <div className="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30">
-            <span className="text-[10px] font-mono text-amber-400 block">Renta Pasiva Proyectada:</span>
-            <span className="font-mono text-sm sm:text-base font-bold text-amber-300">
+          <div className="p-3 rounded-2xl bg-amber-50 border border-amber-200">
+            <span className="text-[10px] font-mono text-amber-800 block font-bold">Renta Pasiva Proyectada:</span>
+            <span className="font-mono text-sm sm:text-base font-bold text-amber-900">
               {formatCurrency(projectedMonthlyPassive, currency)}/mes
             </span>
-            <span className="text-[10px] font-mono text-amber-400/60 block mt-0.5">
+            <span className="text-[10px] font-mono text-amber-700/80 block mt-0.5">
               Sin tocar el capital
             </span>
           </div>
@@ -128,19 +128,19 @@ export function FireCalculatorCard({
       </div>
 
       {/* Footer Milestone Result */}
-      <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/10 text-xs font-mono flex items-center justify-between">
+      <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200 text-xs font-mono flex items-center justify-between">
         {isFireAchieved ? (
-          <div className="flex items-center gap-2 text-emerald-400">
-            <CheckCircle2 className="h-4 w-4 shrink-0" />
+          <div className="flex items-center gap-2 text-emerald-700 font-medium">
+            <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-600" />
             <span>
               ¡Meta FIRE superada en el <strong>Año {fireYearReached}</strong>! Puedes retirarte y vivir de tus rentas.
             </span>
           </div>
         ) : (
-          <div className="flex items-center gap-2 text-white/70">
-            <ShieldCheck className="h-4 w-4 text-amber-400 shrink-0" />
+          <div className="flex items-center gap-2 text-slate-700">
+            <ShieldCheck className="h-4 w-4 text-amber-600 shrink-0" />
             <span>
-              Tu saldo cubrirá el <strong>{freedomPercent}%</strong> de tu costo de vida mensual de forma vitalicia.
+              Tu saldo cubrirá el <strong className="text-amber-800">{freedomPercent}%</strong> de tu costo de vida mensual de forma vitalicia.
             </span>
           </div>
         )}

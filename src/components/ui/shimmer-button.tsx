@@ -21,7 +21,7 @@ export function ShimmerButton({
   shimmerSize = "0.05em",
   shimmerDuration = "3s",
   borderRadius = "100px",
-  background = "radial-gradient(ellipse 80% 50% at 50% 120%, rgba(16, 185, 129, 0.4), rgba(8, 10, 15, 0.95))",
+  background = "linear-gradient(135deg, #059669 0%, #0d9488 100%)",
   className = "",
   children,
   ...props
@@ -48,7 +48,7 @@ export function ShimmerButton({
         </div>
       </div>
       {/* Glow highlight */}
-      <div className="absolute inset-px -z-20 rounded-[inherit] bg-[#0b182d]/60" />
+      <div className="absolute inset-px -z-20 rounded-[inherit] bg-black/10" />
       <span className="relative z-10 flex items-center gap-2">{children}</span>
     </button>
   );

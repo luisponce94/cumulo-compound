@@ -84,19 +84,19 @@ export function CompositionDonut({
   const activeItem = hoveredIndex !== null ? segments[hoveredIndex] : segments[0];
 
   return (
-    <div className="bg-[#0e1e36]/90 backdrop-blur-sm rounded-3xl border border-white/12 p-5 sm:p-6 shadow-2xl relative overflow-hidden flex flex-col justify-between">
+    <div className="bg-white rounded-3xl border border-slate-200/90 p-5 sm:p-6 shadow-xl shadow-slate-900/[0.03] relative overflow-hidden flex flex-col justify-between">
       {/* Background glow */}
-      <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -z-0" />
+      <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none -z-0" />
 
       {/* Header */}
-      <div className="flex items-center justify-between pb-3 border-b border-white/10">
+      <div className="flex items-center justify-between pb-3 border-b border-slate-200/80">
         <div className="flex items-center gap-2">
-          <PieChart className="h-4 w-4 text-emerald-400" />
-          <h3 className="font-serif text-lg text-white font-normal">
+          <PieChart className="h-4 w-4 text-emerald-600" />
+          <h3 className="font-serif text-lg text-slate-900 font-normal">
             Composición del Saldo
           </h3>
         </div>
-        <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-semibold">
+        <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-300 font-bold">
           {segments[0].percent}% generado por interés
         </span>
       </div>
@@ -115,7 +115,7 @@ export function CompositionDonut({
               cy={size / 2}
               r={radius}
               fill="none"
-              stroke="rgba(255, 255, 255, 0.05)"
+              stroke="#e2e8f0"
               strokeWidth={strokeWidth}
             />
 
@@ -141,10 +141,10 @@ export function CompositionDonut({
 
           {/* Central Counter Display */}
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none p-2">
-            <span className="text-[10px] font-mono uppercase text-white/50 tracking-wider">
+            <span className="text-[10px] font-mono uppercase text-slate-500 tracking-wider font-semibold">
               {activeItem.shortLabel}
             </span>
-            <span className="font-mono text-2xl font-extrabold text-white tracking-tight">
+            <span className="font-mono text-2xl font-extrabold text-slate-900 tracking-tight">
               {activeItem.percent}%
             </span>
             <span className={`text-[11px] font-mono font-bold ${activeItem.text}`}>
@@ -162,12 +162,12 @@ export function CompositionDonut({
               onMouseLeave={() => setHoveredIndex(null)}
               className={`p-2.5 rounded-xl border transition-all cursor-pointer ${
                 hoveredIndex === seg.index
-                  ? `${seg.border} bg-white/[0.04] scale-[1.02]`
-                  : "border-transparent hover:border-white/10 bg-white/[0.01]"
+                  ? `${seg.border} bg-slate-50 scale-[1.02] shadow-xs`
+                  : "border-transparent hover:border-slate-200 bg-white"
               }`}
             >
               <div className="flex items-center justify-between text-xs font-mono">
-                <span className="flex items-center gap-2 text-white/80">
+                <span className="flex items-center gap-2 text-slate-800 font-medium">
                   <span
                     className="w-2.5 h-2.5 rounded-full shrink-0"
                     style={{ backgroundColor: seg.color }}
@@ -176,7 +176,7 @@ export function CompositionDonut({
                 </span>
                 <span className={`font-bold ${seg.text}`}>{seg.percent}%</span>
               </div>
-              <div className="flex items-center justify-between mt-1 text-[11px] font-mono text-white/40 pl-4.5">
+              <div className="flex items-center justify-between mt-1 text-[11px] font-mono text-slate-500 pl-4.5">
                 <span>{formatCurrency(seg.value, currency)}</span>
               </div>
             </div>
@@ -185,11 +185,11 @@ export function CompositionDonut({
       </div>
 
       {/* Footer Takeaway Banner */}
-      <div className="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-xs font-mono text-emerald-200/90 flex items-center gap-2">
-        <Sparkles className="h-4 w-4 text-emerald-400 shrink-0" />
+      <div className="p-3 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs font-mono text-emerald-900 flex items-center gap-2">
+        <Sparkles className="h-4 w-4 text-emerald-600 shrink-0" />
         <span>
           Por cada $1.00 de tu bolsillo, el interés compuesto aporta{" "}
-          <strong className="text-white">
+          <strong className="text-emerald-950 font-bold">
             ${(totalInterest / Math.max(initialCapital + totalContributions, 1)).toFixed(2)}
           </strong>{" "}
           adicionales.

@@ -2,26 +2,26 @@
 
 @layer base {
   :root {
-    --background: #091322;
-    --foreground: #f8fafc;
-    --surface-base: #0d1d36;
-    --surface-card: #122544;
-    --surface-highlight: #172e54;
-    --border-subtle: rgba(186, 230, 253, 0.14);
-    --border-emerald: rgba(16, 185, 129, 0.35);
-    --emerald-glow: #10b981;
-    --cyan-glow: #38bdf8;
+    --background: #faf8f5;
+    --foreground: #0f172a;
+    --surface-base: #f4f1ea;
+    --surface-card: #ffffff;
+    --surface-highlight: #ebe6dc;
+    --border-subtle: rgba(15, 23, 42, 0.09);
+    --border-emerald: rgba(5, 150, 105, 0.25);
+    --emerald-glow: #059669;
+    --cyan-glow: #0284c7;
   }
 
   body {
     background-color: var(--background);
     color: var(--foreground);
     background-image: 
-      radial-gradient(at 15% 15%, rgba(14, 165, 233, 0.12) 0px, transparent 55%),
-      radial-gradient(at 85% 10%, rgba(16, 185, 129, 0.12) 0px, transparent 55%),
-      radial-gradient(at 50% 50%, rgba(30, 58, 138, 0.18) 0px, transparent 75%),
-      radial-gradient(at 80% 85%, rgba(245, 158, 11, 0.08) 0px, transparent 60%),
-      radial-gradient(at 20% 80%, rgba(56, 189, 248, 0.10) 0px, transparent 60%);
+      radial-gradient(at 15% 12%, rgba(16, 185, 129, 0.08) 0px, transparent 50%),
+      radial-gradient(at 85% 10%, rgba(14, 165, 233, 0.07) 0px, transparent 50%),
+      radial-gradient(at 50% 45%, rgba(245, 158, 11, 0.05) 0px, transparent 70%),
+      radial-gradient(at 80% 85%, rgba(99, 102, 241, 0.05) 0px, transparent 60%),
+      radial-gradient(at 20% 85%, rgba(16, 185, 129, 0.06) 0px, transparent 60%);
     background-attachment: fixed;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", "Plus Jakarta Sans", sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -43,7 +43,7 @@
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
-  background: rgba(255, 255, 255, 0.08);
+  background: #e2e8f0;
   border-radius: 9999px;
   height: 6px;
   outline: none;
@@ -55,31 +55,31 @@ input[type="range"]::-webkit-slider-thumb {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #10b981;
+  background: #059669;
   cursor: pointer;
-  box-shadow: 0 0 14px rgba(16, 185, 129, 0.6);
+  box-shadow: 0 2px 10px rgba(5, 150, 105, 0.45);
   border: 2px solid #ffffff;
   transition: transform 0.15s ease, background-color 0.15s ease;
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
   transform: scale(1.15);
-  background: #34d399;
+  background: #10b981;
 }
 
 input[type="range"]::-moz-range-thumb {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #10b981;
+  background: #059669;
   cursor: pointer;
-  box-shadow: 0 0 14px rgba(16, 185, 129, 0.6);
+  box-shadow: 0 2px 10px rgba(5, 150, 105, 0.45);
   border: 2px solid #ffffff;
 }
 
-/* Noise overlay for subtle museum texture */
+/* Subtle editorial paper grain */
 .noise-texture {
-  background-image: radial-gradient(rgba(16, 185, 129, 0.04) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(15, 23, 42, 0.025) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
@@ -111,13 +111,13 @@ input[type="range"]::-moz-range-thumb {
 .bg-grid-mesh {
   background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(15, 23, 42, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
 }
 
 .bg-dot-matrix {
   background-size: 28px 28px;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(15, 23, 42, 0.08) 1.2px, transparent 1.2px);
 }
 
 @keyframes pulse-slow {
