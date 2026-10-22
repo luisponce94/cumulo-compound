@@ -1,6 +1,6 @@
 export type ContributionFrequency = "mensual" | "quincenal" | "anual";
 export type CompoundFrequency = 1 | 2 | 4 | 12 | 365; // Anual, Semestral, Trimestral, Mensual, Diaria
-export type CurrencyCode = "MXN" | "USD" | "EUR";
+export type CurrencyCode = "MXN" | "USD" | "EUR" | "CHF";
 
 export interface InvestmentParams {
   initialCapital: number;

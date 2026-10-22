@@ -33,6 +33,37 @@ interface ArtItem {
 
 const ARTWORKS: ArtItem[] = [
   {
+    id: "compass",
+    title: "Astrolabio Patrimonial & Topografía Suiza",
+    subtitle: "Precisión Cartográfica & Retorno Compuesto",
+    tagline: "Instrumento suizo de alta montaña para navegar el horizonte de acumulación a largo plazo.",
+    src: "/images/wealth-compass.jpg",
+    badge: "CARTOGRAFÍA TOPOGRÁFICA SUIZA",
+    badgeColor: "bg-sky-100 text-sky-800 border-sky-300",
+    description:
+      "Inspirado en la cartografía de alta precisión de la Confederación Suiza. Mide la velocidad de ascenso de tu capital por las curvas de nivel del interés compuesto, preservando el poder adquisitivo real ante la inflación.",
+    hotspots: [
+      {
+        x: 50,
+        y: 50,
+        title: "Pivote Central Altimétrico",
+        text: "Tasa de rendimiento real ajustada a la inflación interanual.",
+      },
+      {
+        x: 72,
+        y: 35,
+        title: "Aguja Guía de Acumulación",
+        text: "Vector de crecimiento patrimonial orientado hacia la cumbre financiera.",
+      },
+      {
+        x: 32,
+        y: 65,
+        title: "Retícula Geodésica",
+        text: "Frecuencia de capitalización continua que compacta el tiempo de ascenso.",
+      },
+    ],
+  },
+  {
     id: "sculpture",
     title: "Escultura Exponencial de Cristal",
     subtitle: "Arquitectura del Interés Compuesto",
@@ -91,31 +122,6 @@ const ARTWORKS: ArtItem[] = [
         y: 28,
         title: "Nodos de Renta Pasiva",
         text: "Rendimientos mensuales vitalicios que puedes retirar sin tocar tu capital.",
-      },
-    ],
-  },
-  {
-    id: "compass",
-    title: "Astrolabio Patrimonial",
-    subtitle: "Precisión Matemática & Tasa de Retorno",
-    tagline: "Navegación algorítmica discreta con horizonte de largo plazo.",
-    src: "/images/wealth-compass.jpg",
-    badge: "INSTRUMENTAL FINANCIERO",
-    badgeColor: "bg-sky-100 text-sky-800 border-sky-300",
-    description:
-      "Instrumento de banca privada para medir la velocidad de crecimiento según la frecuencia de capitalización y tasa libre de riesgo.",
-    hotspots: [
-      {
-        x: 50,
-        y: 50,
-        title: "Pivote Central",
-        text: "Tasa de interés neta descontando la inflación anual.",
-      },
-      {
-        x: 72,
-        y: 35,
-        title: "Aguja Esmeralda",
-        text: "Multiplicador de riqueza proyectado hacia tu objetivo financiero.",
       },
     ],
   },
@@ -221,9 +227,9 @@ export function InteractiveVisualGallery({
                   : "text-slate-600 hover:text-slate-900"
               }`}
             >
-              {idx === 0 && <Layers className="h-3 w-3" />}
-              {idx === 1 && <TreePine className="h-3 w-3" />}
-              {idx === 2 && <Compass className="h-3 w-3" />}
+              {art.id === "compass" && <Compass className="h-3 w-3" />}
+              {art.id === "sculpture" && <Layers className="h-3 w-3" />}
+              {art.id === "tree" && <TreePine className="h-3 w-3" />}
               <span>{art.title.split(" ")[0]}</span>
             </button>
           ))}

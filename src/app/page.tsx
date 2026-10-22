@@ -207,7 +207,7 @@ ${window.location.href}`;
           <div className="flex items-center gap-1.5 sm:gap-3">
             {/* Currency Selector (Always accessible on all devices) */}
             <div className="flex items-center bg-slate-100 border border-slate-200 rounded-full p-0.5 sm:p-1 text-xs font-mono">
-              {(["MXN", "USD", "EUR"] as CurrencyCode[]).map((cur) => (
+              {(["MXN", "USD", "EUR", "CHF"] as CurrencyCode[]).map((cur) => (
                 <button
                   key={cur}
                   onClick={() => setCurrency(cur)}
