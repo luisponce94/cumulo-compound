@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "project": {
+    "name": "cumulo-compound",
+    "productType": null,
+    "stack": [
+      "nextjs",
+      "react",
+      "tailwind-v4"
+    ]
+  },
+  "sources": {
+    "tokens": [
+      "src/app/globals.css"
+    ],
+    "components": [
+      "src/components/ui"
+    ],
+    "assets": [],
+    "instructions": [
+      "AGENTS.md"
+    ]
+  },
+  "design": {
+    "colorMode": "light",
+    "colors": {
+      "--background": {
+        "value": "#080a0f",
+        "source": "src/app/globals.css"
+      },
+      "--foreground": {
+        "value": "#f1f5f9",
+        "source": "src/app/globals.css"
+      },
+      "--border-subtle": {
+        "value": "rgba(255, 255, 255, 0.08)",
+        "source": "src/app/globals.css"
+      },
+      "--border-emerald": {
+        "value": "rgba(16, 185, 129, 0.25)",
+        "source": "src/app/globals.css"
+      }
+    },
+    "typography": {},
+    "spacing": {},
+    "radius": {},
+    "shadows": {},
+    "motion": {},
+    "density": "unknown"
+  },
+  "components": {
+    "installed": [
+      "border-beam",
+      "breakdown-table",
+      "chart-area-interactive",
+      "comparison-drawer",
+      "composition-donut",
+      "engineering-harness",
+      "fire-calculator-card",
+      "gauge-meter",
+      "number-ticker",
+      "scenario-presets",
+      "shimmer-button",
+      "smooth-scroll",
+      "spotlight-card",
+      "target-goal-modal"
+    ],
+    "preferredPrimitives": [],
+    "patterns": []
+  },
+  "constraints": {
+    "must": [],
+    "avoid": []
+  },
+  "decisions": [],
+  "evidence": [
+    {
+      "fact": "components.installed",
+      "source": "src/components/ui"
+    },
+    {
+      "fact": "design.colorMode:light",
+      "source": "src/app/globals.css"
+    },
+    {
+      "fact": "design.tokens",
+      "source": "src/app/globals.css"
+    },
+    {
+      "fact": "project.instructions",
+      "source": "AGENTS.md"
+    },
+    {
+      "fact": "project.stack:nextjs",
+      "source": "package.json"
+    },
+    {
+      "fact": "project.stack:react",
+      "source": "package.json"
+    },
+    {
+      "fact": "project.stack:tailwind-v4",
+      "source": "package.json"
+    }
+  ],
+  "generatedAt": "2026-10-22T16:53:51.436Z"
+}

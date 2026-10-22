@@ -23,6 +23,7 @@ import { SpotlightCard } from "@/components/ui/spotlight-card";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { GaugeMeter } from "@/components/ui/gauge-meter";
 import { EngineeringHarness } from "@/components/ui/engineering-harness";
+import { HeroShowcase } from "@/components/ui/hero-showcase";
 import {
   TrendingUp,
   DollarSign,
@@ -271,27 +272,19 @@ ${window.location.href}`;
           onSelectPreset={handleSelectPreset}
         />
 
-        {/* EXECUTIVE NARRATIVE TAKEAWAY BANNER (Anthropic Dashboard Spec) */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-500/10 via-[#0e131a] to-cyan-500/10 border border-emerald-500/30 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="h-8 w-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
-              <Sparkles className="h-4 w-4" />
-            </div>
-            <p className="text-xs sm:text-sm font-mono text-white/90 leading-relaxed">
-              En <strong className="text-white font-bold">{years} años</strong>, tu patrimonio alcanzará{" "}
-              <strong className="text-emerald-400 font-bold">{formatCurrency(results.finalBalance, currency)}</strong>, multiplicando tu dinero{" "}
-              <strong className="text-amber-300 font-bold">{results.wealthMultiplier}x</strong>. El{" "}
-              <strong className="text-cyan-300 font-bold">{interestPct}%</strong> de tu saldo final provendrá exclusivamente del interés compuesto.
-            </p>
-          </div>
-          <button
-            onClick={() => setIsCompareOpen(true)}
-            className="text-xs font-mono text-cyan-400 hover:text-cyan-300 flex items-center gap-1 shrink-0 underline decoration-cyan-400/40 hover:decoration-cyan-400 cursor-pointer hidden md:flex"
-          >
-            <span>Ver escenario alternativo</span>
-            <ArrowUpRight className="h-3.5 w-3.5" />
-          </button>
-        </div>
+        {/* HERO SHOWCASE (3 EXPLORATORY DIRECTIONS - ATMOSPHERIC LAYERED DESIGN) */}
+        <HeroShowcase
+          finalBalance={results.finalBalance}
+          totalInterest={results.totalInterest}
+          totalInvested={results.totalInvested}
+          wealthMultiplier={results.wealthMultiplier}
+          interestPct={interestPct}
+          years={years}
+          annualInterestRate={annualInterestRate}
+          currency={currency}
+          onOpenTargetModal={() => setIsGoalModalOpen(true)}
+          onOpenCompareModal={() => setIsCompareOpen(true)}
+        />
 
         {/* 4 PRIMARY IMPACT KPI CARDS (Enhanced with 21st Spotlight & BorderBeam) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
