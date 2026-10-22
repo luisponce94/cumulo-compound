@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import {
   InvestmentParams,
   calculateCompoundInterest,
@@ -14,6 +14,15 @@ import { ChartAreaInteractive } from "@/components/ui/chart-area-interactive";
 import { BreakdownTable } from "@/components/ui/breakdown-table";
 import { TargetGoalModal } from "@/components/ui/target-goal-modal";
 import { ScenarioPresets } from "@/components/ui/scenario-presets";
+import { CompositionDonut } from "@/components/ui/composition-donut";
+import { FireCalculatorCard } from "@/components/ui/fire-calculator-card";
+import { ComparisonDrawer } from "@/components/ui/comparison-drawer";
+import { BorderBeam } from "@/components/ui/border-beam";
+import { NumberTicker } from "@/components/ui/number-ticker";
+import { SpotlightCard } from "@/components/ui/spotlight-card";
+import { ShimmerButton } from "@/components/ui/shimmer-button";
+import { GaugeMeter } from "@/components/ui/gauge-meter";
+import { EngineeringHarness } from "@/components/ui/engineering-harness";
 import {
   TrendingUp,
   DollarSign,
@@ -29,6 +38,10 @@ import {
   ArrowUpRight,
   Sliders,
   PieChart,
+  GitCompare,
+  Flame,
+  Plus,
+  Cpu,
 } from "lucide-react";
 
 export default function CompoundCalculatorPage() {
@@ -45,11 +58,42 @@ export default function CompoundCalculatorPage() {
   // UI state
   const [activePresetId, setActivePresetId] = useState<string | null>("cetes");
   const [isGoalModalOpen, setIsGoalModalOpen] = useState(false);
+  const [isCompareOpen, setIsCompareOpen] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
+  const [showHarness, setShowHarness] = useState(false);
 
-  // Recalculate projection live on every input change
-  const results = useMemo(() => {
-    return calculateCompoundInterest({
+  // URL Query Sync on mount
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const c = params.get("c");
+    const m = params.get("m");
+    const r = params.get("r");
+    const y = params.get("y");
+    const cur = params.get("cur") as CurrencyCode | null;
+
+    if (c) setInitialCapital(Number(c));
+    if (m) setPeriodicContribution(Number(m));
+    if (r) setAnnualInterestRate(Number(r));
+    if (y) setYears(Number(y));
+    if (cur && ["MXN", "USD", "EUR"].includes(cur)) setCurrency(cur);
+  }, []);
+
+  // Sync state to URL without refreshing
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams();
+    params.set("c", initialCapital.toString());
+    params.set("m", periodicContribution.toString());
+    params.set("r", annualInterestRate.toString());
+    params.set("y", years.toString());
+    params.set("cur", currency);
+    window.history.replaceState({}, "", `${window.location.pathname}?${params.toString()}`);
+  }, [initialCapital, periodicContribution, annualInterestRate, years, currency]);
+
+  // Current calculation params
+  const currentParams: InvestmentParams = useMemo(
+    () => ({
       initialCapital,
       periodicContribution,
       contributionFrequency,
@@ -58,17 +102,23 @@ export default function CompoundCalculatorPage() {
       compoundFrequency,
       annualInflationRate,
       currency,
-    });
-  }, [
-    initialCapital,
-    periodicContribution,
-    contributionFrequency,
-    annualInterestRate,
-    years,
-    compoundFrequency,
-    annualInflationRate,
-    currency,
-  ]);
+    }),
+    [
+      initialCapital,
+      periodicContribution,
+      contributionFrequency,
+      annualInterestRate,
+      years,
+      compoundFrequency,
+      annualInflationRate,
+      currency,
+    ]
+  );
+
+  // Recalculate projection live on every input change
+  const results = useMemo(() => {
+    return calculateCompoundInterest(currentParams);
+  }, [currentParams]);
 
   // Handle Preset Selection
   const handleSelectPreset = (preset: PresetScenario) => {
@@ -106,12 +156,13 @@ export default function CompoundCalculatorPage() {
 
   // Share calculation summary snapshot
   const handleShare = () => {
-    const text = `Proyección de Interés Compuesto en Cúmulo:
+    const text = `Proyección Patrimonial en Cúmulo:
 • Saldo Final: ${formatCurrency(results.finalBalance, currency)}
-• Intereses Ganados: ${formatCurrency(results.totalInterest, currency)} (${interestPct}%)
+• Intereses Ganados: ${formatCurrency(results.totalInterest, currency)} (${interestPct}% del total)
 • Capital Aportado: ${formatCurrency(results.totalInvested, currency)}
-• Tasa: ${annualInterestRate}% a ${years} años.
-Multiplicador: ${results.wealthMultiplier}x`;
+• Tasa: ${annualInterestRate}% a ${years} años
+• Multiplicador: ${results.wealthMultiplier}x
+${window.location.href}`;
 
     navigator.clipboard.writeText(text);
     setCopiedLink(true);
@@ -122,7 +173,7 @@ Multiplicador: ${results.wealthMultiplier}x`;
     <div className="min-h-screen bg-[#080a0f] text-[#f1f5f9] font-sans noise-texture flex flex-col justify-between">
       
       {/* 1. TOP NAVIGATION & HEADER */}
-      <header className="sticky top-0 z-40 bg-[#0a0d14]/90 backdrop-blur-md border-b border-white/10 px-4 sm:px-8 py-3.5">
+      <header className="sticky top-0 z-40 bg-[#080a0f]/90 backdrop-blur-md border-b border-white/10 px-4 sm:px-8 py-3.5">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           
           {/* Brand Logo & Title */}
@@ -138,17 +189,18 @@ Multiplicador: ${results.wealthMultiplier}x`;
                   CÚMULO
                 </span>
                 <span className="text-[9px] font-mono uppercase bg-emerald-500/15 text-emerald-300 px-2 py-0.5 rounded border border-emerald-500/30 font-semibold tracking-wider">
-                  COMPOUND ENGINE
+                  21ST EDITION
                 </span>
               </div>
               <p className="text-[10px] text-white/50 font-mono hidden sm:block">
-                Proyección Patrimonial & Multiplicador de Riqueza Exponencial
+                Proyección Patrimonial & Harness de Ingeniería Financiera
               </p>
             </div>
           </div>
 
-          {/* Currency Switcher & Goal Action */}
-          <div className="flex items-center gap-3">
+          {/* Currency Switcher & Actions */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Currency Selector */}
             <div className="flex items-center bg-white/5 border border-white/10 rounded-full p-1 text-xs font-mono">
               {(["MXN", "USD", "EUR"] as CurrencyCode[]).map((cur) => (
                 <button
@@ -165,18 +217,43 @@ Multiplicador: ${results.wealthMultiplier}x`;
               ))}
             </div>
 
+            {/* Toggle Engineering Harness */}
             <button
-              onClick={() => setIsGoalModalOpen(true)}
-              className="px-3.5 sm:px-4 py-2 rounded-full bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-mono font-bold tracking-wider uppercase transition-all flex items-center gap-1.5 shadow-lg shadow-emerald-500/20 cursor-pointer"
+              onClick={() => setShowHarness(!showHarness)}
+              className={`px-3 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase transition-all flex items-center gap-1.5 cursor-pointer border ${
+                showHarness
+                  ? "bg-cyan-500 text-black border-cyan-400 shadow-lg shadow-cyan-500/20"
+                  : "bg-white/5 border-white/10 text-white/70 hover:text-white"
+              }`}
             >
-              <Target className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">Definir Meta</span>
+              <Cpu className="h-3.5 w-3.5" />
+              <span className="hidden lg:inline">Eval Harness</span>
             </button>
 
+            {/* A/B Comparator Toggle Button */}
+            <button
+              onClick={() => setIsCompareOpen(true)}
+              className="px-3 py-1.5 rounded-full bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/30 text-cyan-300 text-xs font-mono font-bold tracking-wider uppercase transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
+            >
+              <GitCompare className="h-3.5 w-3.5" />
+              <span className="hidden md:inline">Comparar A/B</span>
+            </button>
+
+            {/* Shimmer Button Target Goal */}
+            <ShimmerButton
+              onClick={() => setIsGoalModalOpen(true)}
+              className="py-1.5 px-3.5 text-xs text-black"
+              background="radial-gradient(ellipse 80% 50% at 50% 120%, rgba(16, 185, 129, 0.9), rgba(6, 182, 212, 0.95))"
+            >
+              <Target className="h-3.5 w-3.5 text-black" />
+              <span className="text-black font-bold">Definir Meta</span>
+            </ShimmerButton>
+
+            {/* Share Snapshot */}
             <button
               onClick={handleShare}
               className="p-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white/70 hover:text-white transition-colors cursor-pointer"
-              title="Copiar resumen al portapapeles"
+              title="Copiar enlace con parámetros al portapapeles"
             >
               {copiedLink ? <Check className="h-4 w-4 text-emerald-400" /> : <Share2 className="h-4 w-4" />}
             </button>
@@ -194,90 +271,107 @@ Multiplicador: ${results.wealthMultiplier}x`;
           onSelectPreset={handleSelectPreset}
         />
 
-        {/* 4 PRIMARY IMPACT KPI CARDS */}
+        {/* EXECUTIVE NARRATIVE TAKEAWAY BANNER (Anthropic Dashboard Spec) */}
+        <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-500/10 via-[#0e131a] to-cyan-500/10 border border-emerald-500/30 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="h-8 w-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+              <Sparkles className="h-4 w-4" />
+            </div>
+            <p className="text-xs sm:text-sm font-mono text-white/90 leading-relaxed">
+              En <strong className="text-white font-bold">{years} años</strong>, tu patrimonio alcanzará{" "}
+              <strong className="text-emerald-400 font-bold">{formatCurrency(results.finalBalance, currency)}</strong>, multiplicando tu dinero{" "}
+              <strong className="text-amber-300 font-bold">{results.wealthMultiplier}x</strong>. El{" "}
+              <strong className="text-cyan-300 font-bold">{interestPct}%</strong> de tu saldo final provendrá exclusivamente del interés compuesto.
+            </p>
+          </div>
+          <button
+            onClick={() => setIsCompareOpen(true)}
+            className="text-xs font-mono text-cyan-400 hover:text-cyan-300 flex items-center gap-1 shrink-0 underline decoration-cyan-400/40 hover:decoration-cyan-400 cursor-pointer hidden md:flex"
+          >
+            <span>Ver escenario alternativo</span>
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </button>
+        </div>
+
+        {/* 4 PRIMARY IMPACT KPI CARDS (Enhanced with 21st Spotlight & BorderBeam) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           
-          {/* Card 1: Final Balance */}
+          {/* Card 1: Final Balance with BorderBeam */}
           <div className="p-6 rounded-3xl bg-gradient-to-br from-emerald-500/20 via-[#0e131a] to-[#0e131a] border border-emerald-500/40 shadow-xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl -z-0" />
+            <BorderBeam size={250} duration={8} colorFrom="#10b981" colorTo="#34d399" />
             <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-emerald-300 block font-bold">
               Saldo Final Proyectado
             </span>
-            <div className="mt-2">
-              <span className="font-mono text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                {formatCurrency(results.finalBalance, currency)}
-              </span>
+            <div className="mt-2 font-mono text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+              $<NumberTicker value={results.finalBalance} />
             </div>
             <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono">
               <span className="text-white/50">Poder real (inflación):</span>
               <span className="text-emerald-400 font-bold">
-                {formatCurrency(results.realFinalBalance, currency)}
+                ${results.realFinalBalance.toLocaleString()}
               </span>
             </div>
           </div>
 
           {/* Card 2: Interest Earned */}
-          <div className="p-6 rounded-3xl bg-[#0e131a] border border-white/10 shadow-xl relative">
+          <SpotlightCard className="p-6">
             <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-emerald-400 block font-bold flex items-center justify-between">
-              <span>Interés Ganado (Ganancia Neta)</span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300">
+              <span>Interés Ganado (Ganancia)</span>
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold">
                 {interestPct}% del total
               </span>
             </span>
-            <div className="mt-2">
-              <span className="font-mono text-3xl sm:text-4xl font-bold text-emerald-400 tracking-tight">
-                +{formatCurrency(results.totalInterest, currency)}
-              </span>
+            <div className="mt-2 font-mono text-3xl sm:text-4xl font-bold text-emerald-400 tracking-tight">
+              +$<NumberTicker value={results.totalInterest} />
             </div>
             <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono text-white/50">
-              <span>Dinero creado por el tiempo:</span>
-              <span className="text-white font-medium">Efecto bola de nieve</span>
+              <span>Efecto bola de nieve:</span>
+              <span className="text-white font-medium">Dinero generado</span>
             </div>
-          </div>
+          </SpotlightCard>
 
           {/* Card 3: Total Invested Out of Pocket */}
-          <div className="p-6 rounded-3xl bg-[#0e131a] border border-white/10 shadow-xl relative">
+          <SpotlightCard className="p-6">
             <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-cyan-400 block font-bold flex items-center justify-between">
-              <span>Total Invertido de tu Bolsillo</span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300">
+              <span>Total Invertido Propio</span>
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-bold">
                 {principalPct}% del total
               </span>
             </span>
-            <div className="mt-2">
-              <span className="font-mono text-3xl sm:text-4xl font-bold text-slate-200 tracking-tight">
-                {formatCurrency(results.totalInvested, currency)}
-              </span>
+            <div className="mt-2 font-mono text-3xl sm:text-4xl font-bold text-slate-200 tracking-tight">
+              $<NumberTicker value={results.totalInvested} />
             </div>
             <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono text-white/50">
-              <span>Capital inicial + {years * (contributionFrequency === "quincenal" ? 24 : contributionFrequency === "mensual" ? 12 : 1)} aportes</span>
+              <span>Ahorro de tu bolsillo:</span>
+              <span className="text-white font-medium">{years} años</span>
             </div>
-          </div>
+          </SpotlightCard>
 
-          {/* Card 4: Wealth Multiplier & Monthly Passive Income */}
-          <div className="p-6 rounded-3xl bg-[#0e131a] border border-white/10 shadow-xl relative">
+          {/* Card 4: Wealth Multiplier with GaugeMeter */}
+          <SpotlightCard className="p-6 flex flex-col justify-between">
             <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-amber-400 block font-bold flex items-center justify-between">
-              <span>Multiplicador de Riqueza</span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300">
-                {results.wealthMultiplier}x tu dinero
-              </span>
-            </span>
-            <div className="mt-2 flex items-baseline gap-2">
-              <span className="font-mono text-3xl sm:text-4xl font-bold text-amber-400 tracking-tight">
+              <span>Velocidad de Riqueza</span>
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-bold">
                 {results.wealthMultiplier}x
               </span>
-              <span className="text-xs font-mono text-white/50">
-                retorno total
-              </span>
+            </span>
+            <div className="my-1 flex justify-center">
+              <GaugeMeter value={results.wealthMultiplier} max={8} />
             </div>
-            <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono">
-              <span className="text-white/50">Renta pasiva estimada:</span>
+            <div className="pt-2 border-t border-white/10 flex items-center justify-between text-xs font-mono">
+              <span className="text-white/50">Renta pasiva:</span>
               <span className="text-amber-300 font-bold">
-                {formatCurrency(results.monthlyPassiveIncome, currency)}/mes
+                ${results.monthlyPassiveIncome.toLocaleString()}/mes
               </span>
             </div>
-          </div>
+          </SpotlightCard>
 
         </div>
+
+        {/* OPTIONAL: HARNESS ENGINEERING PANEL */}
+        {showHarness && (
+          <EngineeringHarness currency={currency} />
+        )}
 
         {/* 3. SPLIT WORKSPACE: CONTROLS (Left 5 cols) & CHARTS/VISUALS (Right 7 cols) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -342,10 +436,21 @@ Multiplicador: ${results.wealthMultiplier}x`;
                 }}
                 className="w-full cursor-pointer"
               />
-              <div className="flex justify-between text-[10px] font-mono text-white/40">
-                <span>$0</span>
-                <span>$500k</span>
-                <span>$1M+</span>
+              {/* Stepper Quick Increments */}
+              <div className="flex items-center justify-between text-[10px] font-mono text-white/40">
+                <div className="flex gap-1.5">
+                  {[10_000, 50_000, 100_000].map((step) => (
+                    <button
+                      key={step}
+                      onClick={() => setInitialCapital((prev) => prev + step)}
+                      className="px-2 py-0.5 rounded bg-white/5 hover:bg-white/10 text-white/70 hover:text-white transition-colors cursor-pointer flex items-center gap-0.5"
+                    >
+                      <Plus className="h-2.5 w-2.5" />
+                      ${step / 1000}k
+                    </button>
+                  ))}
+                </div>
+                <span>Máx $1M+</span>
               </div>
             </div>
 
@@ -382,6 +487,22 @@ Multiplicador: ${results.wealthMultiplier}x`;
                 }}
                 className="w-full cursor-pointer"
               />
+              {/* Stepper Quick Increments */}
+              <div className="flex items-center justify-between text-[10px] font-mono text-white/40">
+                <div className="flex gap-1.5">
+                  {[500, 1_000, 2_500, 5_000].map((step) => (
+                    <button
+                      key={step}
+                      onClick={() => setPeriodicContribution((prev) => prev + step)}
+                      className="px-2 py-0.5 rounded bg-white/5 hover:bg-white/10 text-cyan-300/80 hover:text-cyan-300 transition-colors cursor-pointer flex items-center gap-0.5"
+                    >
+                      <Plus className="h-2.5 w-2.5" />
+                      ${step}
+                    </button>
+                  ))}
+                </div>
+                <span>Máx $50k</span>
+              </div>
               
               {/* Contribution Frequency Pills */}
               <div className="flex gap-1.5 pt-1">
@@ -547,7 +668,7 @@ Multiplicador: ${results.wealthMultiplier}x`;
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               
               <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/10 space-y-1">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-bold block flex items-center gap-1">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-bold flex items-center gap-1">
                   <Sparkles className="h-3 w-3" />
                   La Regla del 72
                 </span>
@@ -557,7 +678,7 @@ Multiplicador: ${results.wealthMultiplier}x`;
               </div>
 
               <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/10 space-y-1">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold block flex items-center gap-1">
+                <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-bold flex items-center gap-1">
                   <Target className="h-3 w-3" />
                   Punto de Inflexión Financiera
                 </span>
@@ -580,7 +701,24 @@ Multiplicador: ${results.wealthMultiplier}x`;
 
         </div>
 
-        {/* 4. YEAR-BY-YEAR TABULAR PROJECTION WITH CSV EXPORT */}
+        {/* 4. VISUAL BENTO GRID: COMPOSITION DONUT & FIRE FREEDOM SIMULATOR */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+          <CompositionDonut
+            initialCapital={initialCapital}
+            totalContributions={results.totalInvested - initialCapital}
+            totalInterest={results.totalInterest}
+            finalBalance={results.finalBalance}
+            currency={currency}
+          />
+
+          <FireCalculatorCard
+            finalBalance={results.finalBalance}
+            breakdown={results.breakdown}
+            currency={currency}
+          />
+        </div>
+
+        {/* 5. YEAR-BY-YEAR TABULAR PROJECTION WITH CSV EXPORT */}
         <BreakdownTable
           breakdown={results.breakdown}
           currency={currency}
@@ -588,7 +726,7 @@ Multiplicador: ${results.wealthMultiplier}x`;
           firstMillionYear={results.firstMillionYear}
         />
 
-        {/* 5. EDUCATIONAL FINANCIAL INTELLIGENCE */}
+        {/* 6. EDUCATIONAL FINANCIAL INTELLIGENCE */}
         <div className="bg-[#0e131a] rounded-3xl border border-white/10 p-6 sm:p-8 space-y-4">
           <div className="flex items-center gap-2">
             <HelpCircle className="h-4 w-4 text-emerald-400" />
@@ -629,7 +767,7 @@ Multiplicador: ${results.wealthMultiplier}x`;
 
       </main>
 
-      {/* 6. TARGET GOAL MODAL */}
+      {/* 7. TARGET GOAL MODAL */}
       <TargetGoalModal
         isOpen={isGoalModalOpen}
         onClose={() => setIsGoalModalOpen(false)}
@@ -637,7 +775,15 @@ Multiplicador: ${results.wealthMultiplier}x`;
         onApplyPlan={handleApplyTargetPlan}
       />
 
-      {/* 7. FOOTER */}
+      {/* 8. COMPARISON DRAWER (A/B SCENARIOS) */}
+      <ComparisonDrawer
+        baseParams={currentParams}
+        currency={currency}
+        isOpen={isCompareOpen}
+        onClose={() => setIsCompareOpen(false)}
+      />
+
+      {/* 9. FOOTER */}
       <footer className="border-t border-white/10 py-8 px-4 sm:px-8 text-center text-xs font-mono text-white/40 space-y-2">
         <p className="font-semibold text-white/60">
           CÚMULO — Motor de Inteligencia Financiera & Interés Compuesto

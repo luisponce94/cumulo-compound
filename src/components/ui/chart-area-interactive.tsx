@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { YearlyBreakdown, formatCurrency, CurrencyCode } from "@/utils/compound-interest";
-import { TrendingUp, Layers, BarChart2, Sparkles } from "lucide-react";
+import { TrendingUp, Layers, BarChart2, Sparkles, ShieldCheck } from "lucide-react";
 
 interface ChartProps {
   breakdown: YearlyBreakdown[];
@@ -19,6 +19,7 @@ export function ChartAreaInteractive({
 }: ChartProps) {
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [chartType, setChartType] = useState<"area" | "bars">("area");
+  const [adjustInflation, setAdjustInflation] = useState<boolean>(false);
 
   if (!breakdown || breakdown.length === 0) return null;
 
@@ -32,7 +33,10 @@ export function ChartAreaInteractive({
   const chartWidth = width - padLeft - padRight;
   const chartHeight = height - padTop - padBottom;
 
-  const maxBalance = Math.max(...breakdown.map((d) => d.endBalance), 1);
+  const maxBalance = Math.max(
+    ...breakdown.map((d) => (adjustInflation ? d.realEndBalance : d.endBalance)),
+    1
+  );
   const yearsCount = breakdown.length;
 
   // Scale helpers
@@ -40,16 +44,15 @@ export function ChartAreaInteractive({
   const getY = (val: number) => padTop + chartHeight - (val / maxBalance) * chartHeight;
 
   // Paths generation for Area Chart
-  // Total line (top of interest)
-  const totalPoints = breakdown.map((d, i) => `${getX(i)},${getY(d.endBalance)}`);
-  // Contribution line (principal + contributions)
+  const totalPoints = breakdown.map((d, i) =>
+    `${getX(i)},${getY(adjustInflation ? d.realEndBalance : d.endBalance)}`
+  );
   const contribPoints = breakdown.map((d, i) => `${getX(i)},${getY(d.cumulativeContribution)}`);
-  // Initial capital line
   const initialPoints = breakdown.map((_, i) => `${getX(i)},${getY(initialCapital)}`);
 
   // Area: Interest (between Total and Contributions)
   const interestAreaD = [
-    `M ${getX(0)},${getY(breakdown[0].endBalance)}`,
+    `M ${getX(0)},${getY(adjustInflation ? breakdown[0].realEndBalance : breakdown[0].endBalance)}`,
     ...totalPoints.slice(1).map((pt) => `L ${pt}`),
     ...contribPoints.slice().reverse().map((pt) => `L ${pt}`),
     "Z",
@@ -83,7 +86,6 @@ export function ChartAreaInteractive({
 
   return (
     <div className="bg-[#0e131a] rounded-3xl border border-white/10 p-5 sm:p-7 shadow-2xl relative overflow-hidden flex flex-col justify-between">
-      
       {/* Background glow gradient */}
       <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -z-0" />
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none -z-0" />
@@ -104,34 +106,50 @@ export function ChartAreaInteractive({
             )}
           </div>
           <h3 className="text-xl sm:text-2xl font-serif text-white tracking-tight mt-0.5">
-            Evolución del Patrimonio & Interés Ganado
+            Evolución del Patrimonio & Multiplicador Exponencial
           </h3>
         </div>
 
-        {/* Chart View Switcher */}
-        <div className="flex items-center gap-1.5 bg-black/40 border border-white/10 p-1 rounded-xl self-start sm:self-auto">
+        {/* Chart View Switcher & Inflation Toggle */}
+        <div className="flex flex-wrap items-center gap-2">
+          {/* Inflation Toggle */}
           <button
-            onClick={() => setChartType("area")}
-            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium flex items-center gap-1.5 transition-colors cursor-pointer ${
-              chartType === "area"
-                ? "bg-emerald-500 text-black font-bold shadow-xs"
-                : "text-white/60 hover:text-white"
+            onClick={() => setAdjustInflation(!adjustInflation)}
+            className={`px-3 py-1.5 rounded-xl text-xs font-mono font-medium flex items-center gap-1.5 transition-all cursor-pointer border ${
+              adjustInflation
+                ? "bg-amber-500/20 border-amber-500 text-amber-300 font-bold"
+                : "border-white/10 bg-white/5 text-white/60 hover:text-white"
             }`}
           >
-            <Layers className="h-3.5 w-3.5" />
-            <span>Área Acumulada</span>
+            <ShieldCheck className="h-3.5 w-3.5" />
+            <span>{adjustInflation ? "Poder Real (Inflación Activa)" : "Nominal"}</span>
           </button>
-          <button
-            onClick={() => setChartType("bars")}
-            className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium flex items-center gap-1.5 transition-colors cursor-pointer ${
-              chartType === "bars"
-                ? "bg-emerald-500 text-black font-bold shadow-xs"
-                : "text-white/60 hover:text-white"
-            }`}
-          >
-            <BarChart2 className="h-3.5 w-3.5" />
-            <span>Barras Anuales</span>
-          </button>
+
+          {/* Chart Type Selector */}
+          <div className="flex items-center gap-1 bg-black/40 border border-white/10 p-1 rounded-xl">
+            <button
+              onClick={() => setChartType("area")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium flex items-center gap-1.5 transition-colors cursor-pointer ${
+                chartType === "area"
+                  ? "bg-emerald-500 text-black font-bold shadow-xs"
+                  : "text-white/60 hover:text-white"
+              }`}
+            >
+              <Layers className="h-3.5 w-3.5" />
+              <span>Área Acumulada</span>
+            </button>
+            <button
+              onClick={() => setChartType("bars")}
+              className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium flex items-center gap-1.5 transition-colors cursor-pointer ${
+                chartType === "bars"
+                  ? "bg-emerald-500 text-black font-bold shadow-xs"
+                  : "text-white/60 hover:text-white"
+              }`}
+            >
+              <BarChart2 className="h-3.5 w-3.5" />
+              <span>Barras Anuales</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -146,10 +164,10 @@ export function ChartAreaInteractive({
         <div className="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30">
           <span className="text-[10px] font-mono text-emerald-400 block flex items-center gap-1">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-            Saldo Final Estimado
+            Saldo Final {adjustInflation ? "(Poder Real)" : "(Nominal)"}
           </span>
           <span className="text-sm sm:text-base font-mono font-bold text-white">
-            {formatCurrency(activePoint.endBalance, currency)}
+            {formatCurrency(adjustInflation ? activePoint.realEndBalance : activePoint.endBalance, currency)}
           </span>
         </div>
         <div className="p-3 rounded-2xl bg-cyan-500/10 border border-cyan-500/30">
@@ -158,7 +176,7 @@ export function ChartAreaInteractive({
             Intereses Ganados
           </span>
           <span className="text-sm sm:text-base font-mono font-bold text-cyan-300">
-            {formatCurrency(activePoint.cumulativeInterest, currency)}
+            +{formatCurrency(activePoint.cumulativeInterest, currency)}
           </span>
         </div>
         <div className="p-3 rounded-2xl bg-white/[0.03] border border-white/10">
@@ -288,12 +306,13 @@ export function ChartAreaInteractive({
                 const barWidth = Math.max((chartWidth / yearsCount) * 0.7, 4);
                 const xPos = getX(i) - barWidth / 2;
 
-                const hTotal = ((d.endBalance) / maxBalance) * chartHeight;
+                const val = adjustInflation ? d.realEndBalance : d.endBalance;
+                const hTotal = (val / maxBalance) * chartHeight;
                 const hInvested = (d.cumulativeContribution / maxBalance) * chartHeight;
-                const hInterest = hTotal - hInvested;
+                const hInterest = Math.max(hTotal - hInvested, 0);
 
                 const yTop = padTop + chartHeight - hTotal;
-                const yContrib = padTop + chartHeight - hInvested;
+                const yContrib = padTop + chartHeight - Math.min(hInvested, hTotal);
 
                 return (
                   <g key={i}>
@@ -302,7 +321,7 @@ export function ChartAreaInteractive({
                       x={xPos}
                       y={yContrib}
                       width={barWidth}
-                      height={Math.max(hInvested, 0)}
+                      height={Math.max(Math.min(hInvested, hTotal), 0)}
                       fill="#06b6d4"
                       opacity="0.8"
                       rx="2"
@@ -325,7 +344,6 @@ export function ChartAreaInteractive({
 
           {/* X Axis Labels (Years) */}
           {breakdown.map((d, i) => {
-            // Show every year if <= 10 years, every 2-5 years if longer
             const interval = yearsCount <= 10 ? 1 : yearsCount <= 20 ? 2 : 5;
             const isVisible = d.year === 1 || d.year % interval === 0 || d.year === yearsCount;
 
@@ -380,7 +398,7 @@ export function ChartAreaInteractive({
               />
               <circle
                 cx={getX(hoverIndex)}
-                cy={getY(breakdown[hoverIndex].endBalance)}
+                cy={getY(adjustInflation ? breakdown[hoverIndex].realEndBalance : breakdown[hoverIndex].endBalance)}
                 r="6"
                 fill="#10b981"
                 stroke="#ffffff"
@@ -413,7 +431,6 @@ export function ChartAreaInteractive({
           Desliza el cursor sobre el gráfico para ver el valor exacto de cada año.
         </span>
       </div>
-
     </div>
   );
 }

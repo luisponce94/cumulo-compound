@@ -75,3 +75,27 @@ input[type="range"]::-moz-range-thumb {
   background-image: radial-gradient(rgba(16, 185, 129, 0.04) 1px, transparent 1px);
   background-size: 24px 24px;
 }
+
+/* 21st.dev Animations */
+@keyframes border-beam {
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+.animate-border-beam {
+  animation: border-beam var(--duration) infinite linear;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2.5s linear infinite;
+}
