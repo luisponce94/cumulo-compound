@@ -85,7 +85,7 @@ ${crossoverYear ? `• Año de Inflexión (Interés supera aporte): Año ${cross
   };
 
   return (
-    <div className="bg-[#0e131a] rounded-3xl border border-white/10 p-5 sm:p-7 shadow-2xl space-y-5">
+    <div className="bg-[#0e1e36]/90 backdrop-blur-sm rounded-3xl border border-white/12 p-5 sm:p-7 shadow-2xl space-y-5">
       {/* Table Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
         <div>
@@ -140,7 +140,7 @@ ${crossoverYear ? `• Año de Inflexión (Interés supera aporte): Año ${cross
       </div>
 
       {/* Responsive Table */}
-      <div className="overflow-x-auto rounded-2xl border border-white/5 bg-black/30">
+      <div className="overflow-x-auto rounded-2xl border border-white/10 bg-[#0b182d]/80">
         <table className="w-full text-left text-xs border-collapse">
           <thead>
             <tr className="border-b border-white/10 text-white/50 font-mono bg-white/[0.02]">

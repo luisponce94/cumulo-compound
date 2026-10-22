@@ -228,7 +228,7 @@ export function EngineeringHarness({ currency }: { currency: CurrencyCode }) {
   const allPassed = testResults.length > 0 && testResults.every((r) => r.passed);
 
   return (
-    <div className="bg-[#0e131a] rounded-3xl border border-white/10 p-6 sm:p-8 shadow-2xl space-y-6 relative overflow-hidden">
+    <div className="bg-[#0e1e36]/90 backdrop-blur-sm rounded-3xl border border-white/12 p-6 sm:p-8 shadow-2xl space-y-6 relative overflow-hidden">
       {/* Background glow */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none -z-0" />
 
@@ -298,7 +298,7 @@ export function EngineeringHarness({ currency }: { currency: CurrencyCode }) {
 
       {/* Test Cases Table */}
       {testResults.length > 0 ? (
-        <div className="overflow-x-auto rounded-2xl border border-white/10 bg-black/40">
+        <div className="overflow-x-auto rounded-2xl border border-white/10 bg-[#0b182d]/80">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
               <tr className="border-b border-white/10 text-white/40 font-mono bg-white/[0.02]">

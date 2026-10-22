@@ -34,7 +34,7 @@ export function FireCalculatorCard({
   const fireYearReached = breakdown.find((b) => b.endBalance >= fireTarget)?.year || null;
 
   return (
-    <div className="bg-[#0e131a] rounded-3xl border border-white/10 p-5 sm:p-6 shadow-2xl relative overflow-hidden flex flex-col justify-between">
+    <div className="bg-[#0e1e36]/90 backdrop-blur-sm rounded-3xl border border-white/12 p-5 sm:p-6 shadow-2xl relative overflow-hidden flex flex-col justify-between">
       {/* Background glow */}
       <div className="absolute top-0 right-0 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none -z-0" />
 

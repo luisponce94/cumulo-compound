@@ -171,16 +171,16 @@ ${window.location.href}`;
   };
 
   return (
-    <div className="min-h-screen bg-[#080a0f] text-[#f1f5f9] font-sans noise-texture flex flex-col justify-between">
+    <div className="min-h-screen bg-transparent text-[#f8fafc] font-sans noise-texture flex flex-col justify-between">
       
       {/* 1. TOP NAVIGATION & HEADER */}
-      <header className="sticky top-0 z-40 bg-[#080a0f]/90 backdrop-blur-md border-b border-white/10 px-4 sm:px-8 py-3.5">
+      <header className="sticky top-0 z-40 bg-[#091322]/85 backdrop-blur-md border-b border-white/10 px-4 sm:px-8 py-3.5">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           
           {/* Brand Logo & Title */}
           <div className="flex items-center gap-3">
             <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-emerald-500 to-cyan-400 p-[1.5px] shadow-lg shadow-emerald-500/20">
-              <div className="w-full h-full bg-[#080a0f] rounded-[10px] flex items-center justify-center text-emerald-400">
+              <div className="w-full h-full bg-[#0d1d36] rounded-[10px] flex items-center justify-center text-emerald-400">
                 <TrendingUp className="h-5 w-5" />
               </div>
             </div>
@@ -290,7 +290,7 @@ ${window.location.href}`;
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           
           {/* Card 1: Final Balance with BorderBeam */}
-          <div className="p-6 rounded-3xl bg-gradient-to-br from-emerald-500/20 via-[#0e131a] to-[#0e131a] border border-emerald-500/40 shadow-xl relative overflow-hidden">
+          <div className="p-6 rounded-3xl bg-gradient-to-br from-emerald-500/20 via-[#0e1e36] to-[#0b172a] border border-emerald-500/40 shadow-xl relative overflow-hidden">
             <BorderBeam size={250} duration={8} colorFrom="#10b981" colorTo="#34d399" />
             <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-emerald-300 block font-bold">
               Saldo Final Proyectado
@@ -370,7 +370,7 @@ ${window.location.href}`;
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* LEFT: SLIDERS & CONTROLS DASHBOARD */}
-          <div className="lg:col-span-5 bg-[#0e131a] rounded-3xl border border-white/10 p-6 sm:p-7 shadow-2xl space-y-6">
+          <div className="lg:col-span-5 bg-[#0e1e36]/90 backdrop-blur-sm rounded-3xl border border-white/12 p-6 sm:p-7 shadow-2xl space-y-6">
             
             <div className="flex items-center justify-between pb-3 border-b border-white/10">
               <div className="flex items-center gap-2">
@@ -617,11 +617,11 @@ ${window.location.href}`;
                   }}
                   className="w-full px-2.5 py-1.5 bg-white/5 border border-white/15 rounded-xl text-xs font-mono text-white focus:outline-none focus:border-emerald-500 cursor-pointer"
                 >
-                  <option value={365} className="bg-[#0e131a] text-white">Diaria (365/año)</option>
-                  <option value={12} className="bg-[#0e131a] text-white">Mensual (12/año)</option>
-                  <option value={4} className="bg-[#0e131a] text-white">Trimestral (4/año)</option>
-                  <option value={2} className="bg-[#0e131a] text-white">Semestral (2/año)</option>
-                  <option value={1} className="bg-[#0e131a] text-white">Anual (1/año)</option>
+                  <option value={365} className="bg-[#0e1e36] text-white">Diaria (365/año)</option>
+                  <option value={12} className="bg-[#0e1e36] text-white">Mensual (12/año)</option>
+                  <option value={4} className="bg-[#0e1e36] text-white">Trimestral (4/año)</option>
+                  <option value={2} className="bg-[#0e1e36] text-white">Semestral (2/año)</option>
+                  <option value={1} className="bg-[#0e1e36] text-white">Anual (1/año)</option>
                 </select>
               </div>
 
@@ -720,7 +720,7 @@ ${window.location.href}`;
         />
 
         {/* 6. EDUCATIONAL FINANCIAL INTELLIGENCE */}
-        <div className="bg-[#0e131a] rounded-3xl border border-white/10 p-6 sm:p-8 space-y-4">
+        <div className="bg-[#0e1e36]/90 backdrop-blur-sm rounded-3xl border border-white/12 p-6 sm:p-8 space-y-4">
           <div className="flex items-center gap-2">
             <HelpCircle className="h-4 w-4 text-emerald-400" />
             <h3 className="font-serif text-xl text-white font-normal">

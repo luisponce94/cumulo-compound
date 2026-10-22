@@ -56,8 +56,8 @@ export function ComparisonDrawer({
   const diffInterest = resultsB.totalInterest - resultsA.totalInterest;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="bg-[#0b0e14] border border-white/15 rounded-3xl w-full max-w-4xl p-6 sm:p-8 shadow-2xl relative overflow-hidden flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#050b14]/85 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="bg-[#0e1e36] border border-white/15 rounded-3xl w-full max-w-4xl p-6 sm:p-8 shadow-2xl relative overflow-hidden flex flex-col max-h-[90vh]">
         {/* Glow */}
         <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -z-0" />
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none -z-0" />
@@ -136,7 +136,7 @@ export function ComparisonDrawer({
           {/* Comparison Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Scenario A Card */}
-            <div className="p-5 rounded-2xl bg-[#0e131a] border border-white/10 space-y-4">
+            <div className="p-5 rounded-2xl bg-[#091528] border border-white/10 space-y-4">
               <div className="flex items-center justify-between pb-2 border-b border-white/5">
                 <span className="text-xs font-mono font-bold text-white/60 uppercase tracking-wider">
                   Escenario A (Actual)
@@ -205,7 +205,7 @@ export function ComparisonDrawer({
           </div>
 
           {/* Differential Impact Banner */}
-          <div className="p-5 rounded-2xl bg-gradient-to-r from-emerald-500/15 via-[#0e131a] to-cyan-500/15 border border-emerald-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="p-5 rounded-2xl bg-gradient-to-r from-emerald-500/15 via-[#0d1d36] to-cyan-500/15 border border-emerald-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="space-y-1">
               <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-emerald-400 font-bold flex items-center gap-1.5">
                 <Sparkles className="h-3 w-3" />

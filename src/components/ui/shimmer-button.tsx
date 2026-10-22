@@ -48,7 +48,7 @@ export function ShimmerButton({
         </div>
       </div>
       {/* Glow highlight */}
-      <div className="absolute inset-px -z-20 rounded-[inherit] bg-black/40" />
+      <div className="absolute inset-px -z-20 rounded-[inherit] bg-[#0b182d]/60" />
       <span className="relative z-10 flex items-center gap-2">{children}</span>
     </button>
   );

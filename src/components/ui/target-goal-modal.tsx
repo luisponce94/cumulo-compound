@@ -56,9 +56,9 @@ export function TargetGoalModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#050b14]/85 backdrop-blur-md animate-in fade-in duration-200">
       
-      <div className="relative w-full max-w-xl bg-[#0f141c] border border-emerald-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 overflow-hidden">
+      <div className="relative w-full max-w-xl bg-[#0e1e36] border border-emerald-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 overflow-hidden">
         
         {/* Glow ambiance */}
         <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none -z-0" />

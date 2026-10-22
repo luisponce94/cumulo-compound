@@ -37,7 +37,7 @@ export function SpotlightCard({
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative overflow-hidden rounded-3xl border border-white/10 bg-[#0e131a] transition-all duration-300 hover:border-white/20 ${className}`}
+      className={`relative overflow-hidden rounded-3xl border border-white/12 bg-[#0e1e36]/90 backdrop-blur-sm transition-all duration-300 hover:border-sky-400/30 hover:shadow-xl hover:shadow-[#040812]/40 ${className}`}
       {...props}
     >
       {/* Dynamic Cursor Spotlight */}

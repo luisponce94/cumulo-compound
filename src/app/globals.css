@@ -2,20 +2,27 @@
 
 @layer base {
   :root {
-    --background: #080a0f;
-    --foreground: #f1f5f9;
-    --surface-base: #0d1117;
-    --surface-card: #121820;
-    --surface-highlight: #18222d;
-    --border-subtle: rgba(255, 255, 255, 0.08);
-    --border-emerald: rgba(16, 185, 129, 0.25);
+    --background: #091322;
+    --foreground: #f8fafc;
+    --surface-base: #0d1d36;
+    --surface-card: #122544;
+    --surface-highlight: #172e54;
+    --border-subtle: rgba(186, 230, 253, 0.14);
+    --border-emerald: rgba(16, 185, 129, 0.35);
     --emerald-glow: #10b981;
-    --cyan-glow: #06b6d4;
+    --cyan-glow: #38bdf8;
   }
 
   body {
     background-color: var(--background);
     color: var(--foreground);
+    background-image: 
+      radial-gradient(at 15% 15%, rgba(14, 165, 233, 0.12) 0px, transparent 55%),
+      radial-gradient(at 85% 10%, rgba(16, 185, 129, 0.12) 0px, transparent 55%),
+      radial-gradient(at 50% 50%, rgba(30, 58, 138, 0.18) 0px, transparent 75%),
+      radial-gradient(at 80% 85%, rgba(245, 158, 11, 0.08) 0px, transparent 60%),
+      radial-gradient(at 20% 80%, rgba(56, 189, 248, 0.10) 0px, transparent 60%);
+    background-attachment: fixed;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", "Plus Jakarta Sans", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

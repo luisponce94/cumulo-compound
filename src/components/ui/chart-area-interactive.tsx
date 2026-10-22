@@ -85,7 +85,7 @@ export function ChartAreaInteractive({
   }));
 
   return (
-    <div className="bg-[#0e131a] rounded-3xl border border-white/10 p-5 sm:p-7 shadow-2xl relative overflow-hidden flex flex-col justify-between">
+    <div className="bg-[#0e1e36]/90 backdrop-blur-sm rounded-3xl border border-white/12 p-5 sm:p-7 shadow-2xl relative overflow-hidden flex flex-col justify-between">
       {/* Background glow gradient */}
       <div className="absolute top-0 right-0 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -z-0" />
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none -z-0" />
@@ -126,7 +126,7 @@ export function ChartAreaInteractive({
           </button>
 
           {/* Chart Type Selector */}
-          <div className="flex items-center gap-1 bg-black/40 border border-white/10 p-1 rounded-xl">
+          <div className="flex items-center gap-1 bg-[#091528] border border-white/12 p-1 rounded-xl">
             <button
               onClick={() => setChartType("area")}
               className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium flex items-center gap-1.5 transition-colors cursor-pointer ${
