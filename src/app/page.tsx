@@ -24,6 +24,7 @@ import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { GaugeMeter } from "@/components/ui/gauge-meter";
 import { EngineeringHarness } from "@/components/ui/engineering-harness";
 import { HeroShowcase } from "@/components/ui/hero-showcase";
+import { InteractiveVisualGallery } from "@/components/ui/interactive-visual-gallery";
 import {
   TrendingUp,
   DollarSign,
@@ -43,6 +44,8 @@ import {
   Flame,
   Plus,
   Cpu,
+  Menu,
+  X,
 } from "lucide-react";
 
 export default function CompoundCalculatorPage() {
@@ -62,6 +65,7 @@ export default function CompoundCalculatorPage() {
   const [isCompareOpen, setIsCompareOpen] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
   const [showHarness, setShowHarness] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // URL Query Sync on mount
   useEffect(() => {
@@ -173,24 +177,24 @@ ${window.location.href}`;
   return (
     <div className="min-h-screen bg-transparent text-slate-900 font-sans noise-texture flex flex-col justify-between">
       
-      {/* 1. TOP NAVIGATION & HEADER */}
-      <header className="sticky top-0 z-40 bg-[#faf8f5]/90 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-8 py-3.5 shadow-xs">
+      {/* 1. TOP NAVIGATION & HEADER (Fully responsive across all screen sizes) */}
+      <header className="sticky top-0 z-40 bg-[#faf8f5]/90 backdrop-blur-md border-b border-slate-200/80 px-3 sm:px-8 py-3 shadow-xs">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           
           {/* Brand Logo & Title */}
-          <div className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 p-[1.5px] shadow-md shadow-emerald-500/20">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="h-9 w-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 p-[1.5px] shadow-md shadow-emerald-500/20 shrink-0">
               <div className="w-full h-full bg-white rounded-[10px] flex items-center justify-center text-emerald-600">
                 <TrendingUp className="h-5 w-5" />
               </div>
             </div>
             <div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5 sm:gap-2">
                 <span className="font-mono text-base font-bold tracking-wider text-slate-900">
                   CÚMULO
                 </span>
-                <span className="text-[9px] font-mono uppercase bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded border border-emerald-200 font-semibold tracking-wider">
-                  21ST EDITION
+                <span className="text-[9px] font-mono uppercase bg-emerald-50 text-emerald-700 px-1.5 sm:px-2 py-0.5 rounded border border-emerald-200 font-semibold tracking-wider">
+                  21ST
                 </span>
               </div>
               <p className="text-[10px] text-slate-500 font-mono hidden sm:block">
@@ -199,15 +203,15 @@ ${window.location.href}`;
             </div>
           </div>
 
-          {/* Currency Switcher & Actions */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            {/* Currency Selector */}
-            <div className="flex items-center bg-slate-100 border border-slate-200 rounded-full p-1 text-xs font-mono">
+          {/* Right Header Area */}
+          <div className="flex items-center gap-1.5 sm:gap-3">
+            {/* Currency Selector (Always accessible on all devices) */}
+            <div className="flex items-center bg-slate-100 border border-slate-200 rounded-full p-0.5 sm:p-1 text-xs font-mono">
               {(["MXN", "USD", "EUR"] as CurrencyCode[]).map((cur) => (
                 <button
                   key={cur}
                   onClick={() => setCurrency(cur)}
-                  className={`px-2.5 py-1 rounded-full transition-colors cursor-pointer ${
+                  className={`px-2 sm:px-2.5 py-1 rounded-full transition-colors cursor-pointer text-[11px] sm:text-xs ${
                     currency === cur
                       ? "bg-white text-emerald-700 font-bold shadow-xs border border-slate-200/60"
                       : "text-slate-600 hover:text-slate-900"
@@ -218,49 +222,112 @@ ${window.location.href}`;
               ))}
             </div>
 
-            {/* Toggle Engineering Harness */}
-            <button
-              onClick={() => setShowHarness(!showHarness)}
-              className={`px-3 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase transition-all flex items-center gap-1.5 cursor-pointer border ${
-                showHarness
-                  ? "bg-sky-600 text-white border-sky-600 shadow-md shadow-sky-600/20"
-                  : "bg-slate-100 border-slate-200 text-slate-700 hover:text-slate-900 hover:bg-slate-200/70"
-              }`}
-            >
-              <Cpu className="h-3.5 w-3.5" />
-              <span className="hidden lg:inline">Eval Harness</span>
-            </button>
+            {/* Desktop Actions (Shown on md+) */}
+            <div className="hidden md:flex items-center gap-2 lg:gap-3">
+              {/* Toggle Engineering Harness */}
+              <button
+                onClick={() => setShowHarness(!showHarness)}
+                className={`px-3 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider uppercase transition-all flex items-center gap-1.5 cursor-pointer border ${
+                  showHarness
+                    ? "bg-sky-600 text-white border-sky-600 shadow-md shadow-sky-600/20"
+                    : "bg-slate-100 border-slate-200 text-slate-700 hover:text-slate-900 hover:bg-slate-200/70"
+                }`}
+              >
+                <Cpu className="h-3.5 w-3.5" />
+                <span>Eval Harness</span>
+              </button>
 
-            {/* A/B Comparator Toggle Button */}
-            <button
-              onClick={() => setIsCompareOpen(true)}
-              className="px-3 py-1.5 rounded-full bg-sky-50 hover:bg-sky-100 border border-sky-200 text-sky-800 text-xs font-mono font-bold tracking-wider uppercase transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
-            >
-              <GitCompare className="h-3.5 w-3.5" />
-              <span className="hidden md:inline">Comparar A/B</span>
-            </button>
+              {/* A/B Comparator Toggle Button */}
+              <button
+                onClick={() => setIsCompareOpen(true)}
+                className="px-3 py-1.5 rounded-full bg-sky-50 hover:bg-sky-100 border border-sky-200 text-sky-800 text-xs font-mono font-bold tracking-wider uppercase transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
+              >
+                <GitCompare className="h-3.5 w-3.5" />
+                <span>Comparar A/B</span>
+              </button>
 
-            {/* Shimmer Button Target Goal */}
-            <ShimmerButton
-              onClick={() => setIsGoalModalOpen(true)}
-              className="py-1.5 px-3.5 text-xs text-white"
-              background="linear-gradient(135deg, #059669 0%, #0d9488 100%)"
-            >
-              <Target className="h-3.5 w-3.5 text-white" />
-              <span className="text-white font-bold">Definir Meta</span>
-            </ShimmerButton>
+              {/* Shimmer Button Target Goal */}
+              <ShimmerButton
+                onClick={() => setIsGoalModalOpen(true)}
+                className="py-1.5 px-3.5 text-xs text-white"
+                background="linear-gradient(135deg, #059669 0%, #0d9488 100%)"
+              >
+                <Target className="h-3.5 w-3.5 text-white" />
+                <span className="text-white font-bold">Definir Meta</span>
+              </ShimmerButton>
 
-            {/* Share Snapshot */}
-            <button
-              onClick={handleShare}
-              className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 hover:text-slate-900 transition-colors cursor-pointer"
-              title="Copiar enlace con parámetros al portapapeles"
-            >
-              {copiedLink ? <Check className="h-4 w-4 text-emerald-600" /> : <Share2 className="h-4 w-4" />}
-            </button>
+              {/* Share Snapshot */}
+              <button
+                onClick={handleShare}
+                className="p-2 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 hover:text-slate-900 transition-colors cursor-pointer"
+                title="Copiar enlace con parámetros al portapapeles"
+              >
+                {copiedLink ? <Check className="h-4 w-4 text-emerald-600" /> : <Share2 className="h-4 w-4" />}
+              </button>
+            </div>
+
+            {/* Mobile Actions: Primary Goal CTA + Mobile Hamburger Toggle */}
+            <div className="flex md:hidden items-center gap-1.5">
+              <button
+                onClick={() => setIsGoalModalOpen(true)}
+                className="px-2.5 py-1.5 rounded-full bg-emerald-600 text-white text-xs font-mono font-bold flex items-center gap-1 shadow-xs"
+              >
+                <Target className="h-3.5 w-3.5" />
+                <span className="text-[11px]">Meta</span>
+              </button>
+
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="p-1.5 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700"
+                aria-label="Abrir menú móvil"
+              >
+                {isMobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              </button>
+            </div>
+
           </div>
 
         </div>
+
+        {/* Mobile Dropdown Panel when menu is opened */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden border-t border-slate-200 mt-2.5 pt-3 pb-2 space-y-2 animate-in slide-in-from-top-2 duration-200">
+            <div className="grid grid-cols-2 gap-2 text-xs font-mono">
+              <button
+                onClick={() => {
+                  setIsCompareOpen(true);
+                  setIsMobileMenuOpen(false);
+                }}
+                className="p-2.5 rounded-xl bg-sky-50 border border-sky-200 text-sky-800 font-bold flex items-center gap-2"
+              >
+                <GitCompare className="h-4 w-4" />
+                <span>Comparar A/B</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  setShowHarness(!showHarness);
+                  setIsMobileMenuOpen(false);
+                }}
+                className="p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-800 font-bold flex items-center gap-2"
+              >
+                <Cpu className="h-4 w-4 text-sky-700" />
+                <span>Eval Harness</span>
+              </button>
+            </div>
+
+            <button
+              onClick={() => {
+                handleShare();
+                setIsMobileMenuOpen(false);
+              }}
+              className="w-full p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 font-mono text-xs font-bold flex items-center justify-center gap-2"
+            >
+              {copiedLink ? <Check className="h-4 w-4 text-emerald-600" /> : <Share2 className="h-4 w-4" />}
+              <span>{copiedLink ? "¡Enlace copiado al portapapeles!" : "Compartir Simulación Patrimonial"}</span>
+            </button>
+          </div>
+        )}
       </header>
 
       {/* 2. MAIN WORKSPACE */}
@@ -360,6 +427,15 @@ ${window.location.href}`;
           </SpotlightCard>
 
         </div>
+
+        {/* 2.5 INTERACTIVE 3D VISUAL ART GALLERY & FOCAL HOTSPOTS */}
+        <InteractiveVisualGallery
+          finalBalance={results.finalBalance}
+          totalInterest={results.totalInterest}
+          totalInvested={results.totalInvested}
+          years={years}
+          currency={currency}
+        />
 
         {/* OPTIONAL: HARNESS ENGINEERING PANEL */}
         {showHarness && (

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { Sparkles, Compass, Zap, Target, TrendingUp, Layers, ArrowRight, ShieldCheck, Flame } from "lucide-react";
 import { NumberTicker } from "./number-ticker";
 import { BorderBeam } from "./border-beam";
@@ -115,12 +116,26 @@ export function HeroShowcase({
 
           {/* Content */}
           <div className="relative z-10 max-w-4xl space-y-6">
-            {/* Pill Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-900 text-xs font-mono font-medium shadow-xs">
-              <span className="h-2 w-2 rounded-full bg-emerald-600 animate-ping" />
-              <span className="font-bold tracking-wider uppercase">Motor de Crecimiento Compuesto</span>
-              <span className="text-emerald-400">•</span>
-              <span className="text-emerald-800">Rendimiento continuo 2026</span>
+            {/* Pill Badge & Visual Artwork Indicator */}
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-900 text-xs font-mono font-medium shadow-xs">
+                <span className="h-2 w-2 rounded-full bg-emerald-600 animate-ping" />
+                <span className="font-bold tracking-wider uppercase">Motor de Crecimiento Compuesto</span>
+                <span className="text-emerald-400">•</span>
+                <span className="text-emerald-800">Rendimiento continuo 2026</span>
+              </div>
+
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/90 border border-emerald-200 text-slate-800 text-xs font-mono shadow-xs">
+                <div className="relative w-5 h-5 rounded-full overflow-hidden shrink-0 border border-emerald-300">
+                  <Image
+                    src="/images/compound-growth-sculpture.jpg"
+                    alt="Escultura Exponencial"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <span className="text-[11px] font-semibold text-emerald-900">Escultura 3D Activa</span>
+              </div>
             </div>
 
             {/* Monumental Swiss Editorial Headline */}
@@ -252,7 +267,17 @@ export function HeroShowcase({
               <BorderBeam size={180} duration={10} colorFrom="#0284c7" colorTo="#059669" />
               
               <div className="flex items-center justify-between pb-3 border-b border-slate-200 text-xs font-mono">
-                <span className="text-sky-800 uppercase tracking-wider font-bold">Proyección a {years} Años</span>
+                <div className="flex items-center gap-2">
+                  <div className="relative w-8 h-8 rounded-lg overflow-hidden border border-sky-200 shadow-xs shrink-0">
+                    <Image
+                      src="/images/wealth-compass.jpg"
+                      alt="Brújula Patrimonial"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <span className="text-sky-800 uppercase tracking-wider font-bold">Proyección a {years} Años</span>
+                </div>
                 <span className="text-emerald-700 font-bold">+{interestPct}% Rendimiento</span>
               </div>
 
@@ -313,7 +338,17 @@ export function HeroShowcase({
           />
 
           {/* Content: High Impact Centered Terminal */}
-          <div className="relative z-10 max-w-3xl space-y-6 flex flex-col items-center">
+          <div className="relative z-10 max-w-3xl space-y-5 flex flex-col items-center">
+            {/* Visual Icon Art */}
+            <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border-2 border-amber-300 shadow-xl shadow-amber-500/20">
+              <Image
+                src="/images/exponential-tree.jpg"
+                alt="Árbol Fractal de la Riqueza"
+                fill
+                className="object-cover"
+              />
+            </div>
+
             {/* Aerospace Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 border border-amber-300 text-amber-900 text-xs font-mono font-bold tracking-widest uppercase shadow-xs">
               <Zap className="h-3.5 w-3.5 fill-amber-500 text-amber-600" />

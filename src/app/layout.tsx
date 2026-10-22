@@ -1,6 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { SmoothScroll } from "@/components/ui/smooth-scroll";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#faf8f5",
+};
 
 export const metadata: Metadata = {
   title: "Cúmulo — Calculadora de Interés Compuesto & Proyector Patrimonial",

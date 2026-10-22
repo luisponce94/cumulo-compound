@@ -139,8 +139,13 @@ ${crossoverYear ? `• Año de Inflexión (Interés supera aporte): Año ${cross
         </div>
       </div>
 
+      {/* Mobile Swipe Cue */}
+      <div className="block sm:hidden text-[11px] font-mono text-emerald-800 bg-emerald-50/80 px-3 py-1.5 rounded-xl border border-emerald-200/70">
+        👉 Desliza la tabla hacia los lados para auditar todas las columnas
+      </div>
+
       {/* Responsive Table */}
-      <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-slate-50/50">
+      <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-slate-50/50 -mx-1 sm:mx-0">
         <table className="w-full text-left text-xs border-collapse">
           <thead>
             <tr className="border-b border-slate-200 text-slate-500 font-mono bg-slate-100/70">

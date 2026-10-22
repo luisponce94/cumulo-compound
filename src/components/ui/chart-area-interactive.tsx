@@ -191,11 +191,23 @@ export function ChartAreaInteractive({
       </div>
 
       {/* SVG Chart Canvas */}
-      <div className="w-full aspect-[16/8] sm:aspect-[16/7] relative z-10 select-none">
+      <div className="w-full aspect-[16/8] sm:aspect-[16/7] relative z-10 select-none touch-none">
         <svg
           viewBox={`0 0 ${width} ${height}`}
           className="w-full h-full overflow-visible"
           onMouseLeave={() => setHoverIndex(null)}
+          onTouchStart={(e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const touchX = e.touches[0].clientX - rect.left;
+            const pct = Math.max(0, Math.min(1, touchX / rect.width));
+            setHoverIndex(Math.min(yearsCount - 1, Math.max(0, Math.round(pct * (yearsCount - 1)))));
+          }}
+          onTouchMove={(e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const touchX = e.touches[0].clientX - rect.left;
+            const pct = Math.max(0, Math.min(1, touchX / rect.width));
+            setHoverIndex(Math.min(yearsCount - 1, Math.max(0, Math.round(pct * (yearsCount - 1)))));
+          }}
         >
           <defs>
             {/* Gradients */}
